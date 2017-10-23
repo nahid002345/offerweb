@@ -1,0 +1,262 @@
+﻿@model OfferWebSystem.Models.CategoryDetailModel
+@{
+    var CategoryObj = Model.Category;
+}
+
+
+<div class="">
+    <span class="left transparent green-text large"><i class="mdi-action-class"></i></span><h4 class="header">Category</h4>
+    <div class="row">
+
+        <div class="card-panel yellow lighten-4">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+            <strong>Please!</strong> Width & Height of Category Icon Image should be equal.
+        </div>
+    </div>
+    @if (Model.IsNew)
+    {
+        <div class="">
+
+            @Html.AntiForgeryToken()
+            @using (Html.BeginForm("InsertCategory", "Category", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+            {
+                @Html.HiddenFor(m => m.Category.ID)
+                @Html.HiddenFor(m => m.Category.CreatedBy)
+                @Html.HiddenFor(m => m.Category.CreatedOn)
+                @Html.HiddenFor(m => m.Category.ModifiedBy)
+                @Html.HiddenFor(m => m.Category.ModifiedOn)
+
+                <div class="col-sm-2 pull-right">
+                    <button class="btn waves-effect waves-light right " type="submit" name="action">Save<i class="mdi-content-save left"></i></button>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+                        <i class="mdi-action-receipt prefix"></i>
+                        @Html.TextBoxFor(m => m.Category.CategoryName, new { id = "CategoryName", @class = "validate", placeholder = "Enter Category Name" })
+                        <label for="CategoryName" class="active">Category Name</label>
+                        @Html.ValidationMessageFor(m => m.Category.CategoryName, null, new { @class = "card-panel red display" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <input id="ctrlCatIcon" name="ctrlCatIcon" type="file" multiple class="file-loading" data-preview-file-type="any" accept="image/*" />
+                    </div>
+                </div>
+
+            }
+        </div>
+    }
+    else
+    {
+        <div id="profile-card-postdetail" style=" margin:0px" class="card">
+            <div class="card-panel transparent lighten-2" style="margin:0px;">
+                <span class="email-subject truncate card-title black-text caption">
+                    @CategoryObj.CategoryName
+                </span>
+            </div>
+            <div class="card-content">
+
+                <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right modal-trigger">
+                    <i class="mdi-editor-mode-edit"></i>
+                </a>
+                <div class="row">
+                    @if (!string.IsNullOrEmpty(Model.Category.CategoryIcon) && File.Exists(Server.MapPath(Model.Category.CategoryIcon)))
+                    {
+                        <img class="materialboxed" src="@Model.Category.CategoryIcon" alt="sample" data-caption="@Model.Category.CategoryName">
+                        <p></p>
+                    }
+                </div>
+
+                <div class="email-content-wrap">
+
+                    <hr />
+                    <div class="col s12 m12 l12">
+                        <h6 class="header"><b>Tagged Offer</b></h6>
+                        @if (CategoryObj.OffersInfoes != null && CategoryObj.OffersInfoes.Count > 0)
+                        {
+
+                            var grid = new WebGrid(CategoryObj.OffersInfoes, rowsPerPage: 10, canPage: false, canSort: false);
+
+
+                            @grid.GetHtml(
+                         tableStyle: "striped-table",
+                         headerStyle: "flip-content",
+
+                         columns: new[]{
+
+
+                           grid.Column("PostName",header: "Post"),
+                           grid.Column("OfferDiscountAmt",header: "Discount"),
+                           grid.Column("OfferCategory.CategoryName",header: "Category")
+                            },
+                                                                             mode: WebGridPagerModes.All
+                                                                             );
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="card-panel red lighten-3 white-text">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                    <strong>Warning!</strong> No Offer Found!!!!
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @if (!string.IsNullOrEmpty(Session["UserRole"].ToString()) && Session["UserRole"].ToString().ToLower().Contains("administrator"))
+                    {
+                        <div class="col-sm-12 data-credt-panel">
+                            <div class="row">
+                                <span class="teal-text black-text"><i class="mdi-action-assignment-ind"></i>Created By : @Model.Category.SysUser.UserId</span>
+                                <span class="teal-text black-text"><i class="mdi-action-alarm-add"></i>Created On : @Model.Category.CreatedOn.ToString("dd-MMM-yyyy hh:mm:ss")</span>
+                            </div>
+                            @if (Model.Category.ModifiedBy.HasValue)
+                            {
+                                <div class="row">
+                                    <span class="teal-text black-text"><i class="mdi-action-assignment-ind"></i>Modified By : @Model.Category.SysUser1.UserId</span>
+                                    <span class="teal-text black-text"><i class="mdi-action-alarm-add"></i>Modified On :@Model.Category.ModifiedOn.Value.ToString("dd-MMM-yyyy hh:mm:ss")</span>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="card-reveal">
+                @Html.AntiForgeryToken()
+                @using (Html.BeginForm("UpdateCategory", "Category", FormMethod.Post, new { @class = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.HiddenFor(m => m.Category.ID)
+                    @Html.HiddenFor(m => m.Category.CreatedBy)
+                    @Html.HiddenFor(m => m.Category.CreatedOn)
+                    @Html.HiddenFor(m => m.Category.ModifiedBy)
+                    @Html.HiddenFor(m => m.Category.ModifiedOn)
+                    <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i></span>
+                    <div class="col-sm-2 pull-right">
+                        <button class="btn waves-effect waves-light right " type="submit" name="action">Save<i class="mdi-content-save left"></i></button>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <i class="mdi-action-receipt prefix"></i>
+                            @Html.TextBoxFor(m => m.Category.CategoryName, new { id = "CategoryName", @class = "validate", placeholder = "Enter Category Name" })
+                            <label for="CategoryName" class="active">Category Name</label>
+                            @Html.ValidationMessageFor(m => m.Category.CategoryName, null, new { @class = "card-panel red display" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-12">
+                            <input id="ctrlCatIcon" name="ctrlCatIcon" type="file" multiple class="file-loading" data-preview-file-type="any" accept="image/*" />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="switch">
+                            <span class="caption"> <i class="mdi-action-verified-user"></i> Active </span>
+                            @if (@Model.Category.IsActive)
+                            {
+                                <label>
+                                    NO
+                                    <input checked="checked" data-val="@Model.Category.IsActive" id="chkIsActive" name="chkIsActive" type="checkbox">
+                                    <span class="lever"></span> YES
+                                </label>
+                            }
+                            else
+                            {
+                                <label>
+                                    NO
+                                    <input data-val="@Model.Category.IsActive" id="chkIsActive" name="chkIsActive" type="checkbox">
+                                    <span class="lever"></span> YES
+                                </label>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var imagePost;
+        var imgPath = '@Model.Category.CategoryIcon';
+        if (imgPath != '') {
+            $.ajax({
+                url: '@Model.Category.CategoryIcon',
+                success: function (data, textStatus) {
+                    imagePost = true;
+
+                    $("#ctrlCatIcon").fileinput({
+                        initialPreviewShowDelete: true,
+                        overwriteInitial: true,
+                        initialPreview: [
+                            "<img src='@Model.Category.CategoryIcon' class='file-preview-image' alt='PostImage'>"
+                        ],
+                        dataType: 'json',
+                        uploadAsync: false,
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: "Pick Image",
+                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                        removeClass: "btn btn-danger",
+                        removeLabel: "Delete",
+                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                        showUpload: false,
+                        uploadClass: "btn btn-info",
+                        uploadLabel: "Upload",
+                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+                        allowedFileExtensions: ["jpg", "gif", "png"],
+                        maxImageWidth: 100,
+                        maxImageHeight: 100,
+                        maxFileCount: 1
+
+                    });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    imagePost = false;
+
+                    $("#ctrlCatIcon").fileinput({
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: "Pick Image",
+                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                        removeClass: "btn btn-danger",
+                        removeLabel: "Delete",
+                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                        showUpload: false,
+                        uploadClass: "btn btn-info",
+                        uploadLabel: "Upload",
+                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+                        allowedFileExtensions: ["jpg", "gif", "png"],
+                        maxImageWidth: 100,
+                        maxImageHeight: 100,
+                        maxFileCount: 1
+
+                    });
+                }
+            });
+        }
+        else {
+            $("#ctrlCatIcon").fileinput({
+                previewFileType: "image",
+                browseClass: "btn btn-success",
+                browseLabel: "Pick Image",
+                browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                removeClass: "btn btn-danger",
+                removeLabel: "Delete",
+                removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                showUpload: false,
+                uploadClass: "btn btn-info",
+                uploadLabel: "Upload",
+                uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+                allowedFileExtensions: ["jpg", "gif", "png"],
+                maxImageWidth: 100,
+                maxImageHeight: 100,
+                maxFileCount: 1
+
+            });
+        }
+
+
+    });
+</script>

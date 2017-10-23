@@ -1,0 +1,28 @@
+﻿@model List<OfferWebSystem.EFnClass.OfferCategory>
+
+<div class="col s12 m12 l12">
+    @if (Model != null && Model.Count > 0)
+    {
+        var grid = new WebGrid(Model, rowsPerPage: 10, canPage: true, canSort: false);
+        @grid.GetHtml(
+                         tableStyle: "table",
+                         headerStyle: "flip-content",
+                              alternatingRowStyle: "striped",
+                         columns: new[]{
+                             grid.Column(header: "Category Name",format:@<text><a  class="editCategory modal-trigger" href="#modal1" data-id="@item.ID" data-url="@Url.Action("UpdateCategory", "Category")">@item.CategoryName</a></text>),
+
+                           grid.Column("IsActive", "Status",format: (item) => (item.IsActive) ? Html.Raw("<span class='mdi-action-done'></span>") : Html.Raw("<span class='mdi-action-highlight-remove'></span>"))
+                         },
+                                                              mode: WebGridPagerModes.All
+                                                              );
+    }
+    else
+    {
+        <div class="row">
+            <div class="card-panel red lighten-3 white-text">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                <strong>Warning!</strong> No Categorys Found!!!!
+            </div>
+        </div>
+    }
+</div>

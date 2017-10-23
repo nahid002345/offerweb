@@ -1,0 +1,151 @@
+﻿@model OfferWebSystem.Models.OfferPostListModel
+
+@{
+    ViewBag.Title = "Post | Discount Buzz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="~/Content/blueprintViewSwitch.css" rel="stylesheet" />
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('.rating-loading').rating({ displayOnly: true, step: 0.5 });
+    });
+</script>
+
+
+<div id="mail-app" class="section">
+
+    <div class="row z-depth-1">
+
+        <nav class="light-blue">
+            <div class="nav-wrapper">
+                <div class="left col s12 m6 l6">
+                    <ul>
+                        <li>
+                            <i class="mdi-maps-local-offer"></i>
+                        </li>
+                        <li>
+                            <h4 class="header"> Offer Post</h4>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m6 l6">
+                    <ul class="right">
+                        <li class="search-out">
+                            <input type="text" class="search-out-text" id="post-search" data-url="@Url.Action("GetPostByCategoryLocation", "Post")">
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="waves-effect waves-block waves-light show-search"><i class="mdi-action-search"></i></a>
+                        </li>
+                        @*<li>
+                                <a href="#" id="list" class="waves-effect waves-block white-text right"><i class="mdi-action-view-list"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" id="grid" class="waves-effect waves-block white-text right"><i class="mdi-action-view-module"></i></a>
+                            </li>*@
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr />
+        <div class="col-sm-3 badge-example left-select-panel">
+            <div class="row">
+                <h4 class="header">Categories</h4>
+                <ul id="task-card" class="collection with-header">
+                    @foreach (OfferWebSystem.EFnClass.OfferCategory oCat in Model.OffersList.Select(x => x.OfferCategory).Distinct().ToList())
+                    {
+                        @*<li class="collection-item">
+                                <a href="#!" class="collection-item">@oCat.CategoryName<span class="badge blue white-text">@oCat.OffersInfoes.Where(t => t.CreatedBy == Model[0].CreatedBy).Count() </span></a>
+                            </li>*@
+                        <li class="collection-item dismissable">
+                            <input type="checkbox" id="chkcat_@oCat.ID" class="chkCategories" data-id="@oCat.ID" value="@oCat.ID" data-url="@Url.Action("GetPostByCategoryLocation", "Post")" />
+                            <label for="chkcat_@oCat.ID">
+                                @if (Model.IsUserAdmin)
+                                {
+                                    @oCat.CategoryName <span class="badge blue white-text">@oCat.OffersInfoes.Where(t => t.OfferCat == oCat.ID).Count() </span>
+                                }
+                                else
+                                {
+                                    @oCat.CategoryName <span class="badge blue white-text">@oCat.OffersInfoes.Where(t => t.OfferCat == oCat.ID && t.CreatedBy == Model.OffersList[0].CreatedBy).Count() </span>
+                                }
+                            </label>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+
+            <div class="row">
+                <h4 class="header">Locations</h4>
+                <ul id="task-card" class="collection with-header">
+                    @foreach (OfferWebSystem.EFnClass.OfferLocation oCat in Model.OffersList.Select(x => x.OfferLocation).Distinct().ToList())
+                    {
+                        @*<li class="collection-item">
+                                <a href="#!" class="collection-item">@oCat.CategoryName<span class="badge blue white-text">@oCat.OffersInfoes.Where(t => t.CreatedBy == Model[0].CreatedBy).Count() </span></a>
+                            </li>*@
+                        <li class="collection-item dismissable">
+                            <input type="checkbox" id="chkLoc_@oCat.ID" class="chkLocation" data-id="@oCat.ID" value="@oCat.ID" data-url="@Url.Action("GetPostByCategoryLocation", "Post")" />
+                            <label for="chkLoc_@oCat.ID">
+                                @if (Model.IsUserAdmin)
+                                {
+                                    @oCat.LocationName <span class="badge blue white-text">@oCat.OffersInfoes.Where(t => t.OfferLoc == oCat.ID).Count() </span>
+                                }
+                                else
+                                {
+                                    @oCat.LocationName <span class="badge blue white-text">@oCat.OffersInfoes.Where(t => t.OfferLoc == oCat.ID && t.CreatedBy == Model.OffersList[0].CreatedBy).Count() </span>
+                                }
+                            </label>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+            @if (Model.IsUserAdmin)
+            {
+                <div class="row">
+                    <h4 class="header">Post Status</h4>
+                    <ul id="task-card" class="collection with-header">
+                        <li class="collection-item dismissable">
+                            <input type="checkbox" id="chkPostActive_1" class="chkPostActive" data-id="1" value="true" data-url="@Url.Action("GetPostByCategoryLocation", "Post")" />
+                            <label for="chkPostActive_1">
+                                Publish
+                            </label>
+                        </li>
+                        <li class="collection-item dismissable">
+                            <input type="checkbox" id="chkPostActive_0" class="chkPostActive" data-id="0" value="false" data-url="@Url.Action("GetPostByCategoryLocation", "Post")" />
+                            <label for="chkPostActive_0">
+                                Unpublish
+                            </label>
+                        </li>
+                    </ul>
+                </div>
+            }
+        </div>
+
+        <div class="col-sm-9 right">
+            <div class="preloader-wrapper center-align hide" id="post-list-loader">
+                <div class="spinner-layer spinner-red-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            @Html.Partial("_postListPartial", Model.OffersList)
+        </div>
+
+
+    </div>
+    <!-- Compose Email Trigger -->
+    <!-- Compose Email Structure -->
+
+
+</div>

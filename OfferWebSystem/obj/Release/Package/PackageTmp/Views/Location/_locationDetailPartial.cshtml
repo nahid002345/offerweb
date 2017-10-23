@@ -1,0 +1,175 @@
+﻿@model OfferWebSystem.Models.LocationDetailModel
+@{
+    var LocationObj = Model.Location;
+}
+
+
+<div class="">
+    <span class="left transparent green-text large"><i class="mdi-maps-place"></i></span><h4 class="header">Location</h4>
+    @if (Model.IsNew)
+    {
+        <div class="">
+
+            @Html.AntiForgeryToken()
+            @using (Html.BeginForm("InsertLocation", "Location", FormMethod.Post, new { @class = "form" }))
+            {
+                @Html.HiddenFor(m => m.Location.ID)
+                @Html.HiddenFor(m => m.Location.CreatedBy)
+                @Html.HiddenFor(m => m.Location.CreatedOn)
+                @Html.HiddenFor(m => m.Location.ModifiedBy)
+                @Html.HiddenFor(m => m.Location.ModifiedOn)
+
+                <div class="col-sm-2 pull-right">
+                    <button class="btn waves-effect waves-light right " type="submit" name="action">Save<i class="mdi-content-save left"></i></button>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+                        <i class="mdi-action-receipt prefix"></i>
+                        @Html.TextBoxFor(m => m.Location.LocationName, new { id = "LocationName", @class = "validate", placeholder = "Enter Location Name" })
+                        <label for="LocationName" class="active">Location Name</label>
+                        @Html.ValidationMessageFor(m => m.Location.LocationName, null, new { @class = "card-panel red display" })
+                    </div>
+                </div>
+
+                @*<div class="row">
+                        <div class="switch">
+                            Active ?
+                            @Html.CheckBoxFor(m => m.Location.IsActive, new { id="chkIsActive"})
+                            @if (@Model.Location.IsActive)
+                            {
+                                <label>
+                                    NO
+                                    <input checked="checked" data-val="@Model.Location.IsActive" id="chkIsActive" name="LocationIsActive" type="checkbox">
+                                    <span class="lever"></span> YES
+                                </label>
+                            }
+                            else
+                            {
+                                <label>
+                                    NO
+                                    <input checked="checked" data-val="@Model.Location.IsActive" id="chkIsActive" name="LocationIsActive" type="checkbox">
+                                    <span class="lever"></span> YES
+                                </label>
+                            }
+
+
+                        </div>
+                    </div>*@
+            }
+        </div>
+    }
+    else
+    {
+        <div id="profile-card-postdetail" style=" margin:0px" class="card">
+            <div class="card-panel transparent lighten-2" style="margin:0px;">
+                <span class="email-subject truncate card-title black-text caption">
+                    @LocationObj.LocationName
+                </span>
+            </div>
+            <div class="card-content">
+                <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right modal-trigger">
+                    <i class="mdi-editor-mode-edit"></i>
+                </a>
+                <div class="email-content-wrap">
+
+                    <hr />
+                    <div class="col s12 m12 l12">
+                        <h6 class="header"><b>Tagged Offer</b></h6>
+                        @if (LocationObj.OffersInfoes != null && LocationObj.OffersInfoes.Count > 0)
+                        {
+
+                            var grid = new WebGrid(LocationObj.OffersInfoes, rowsPerPage: 10, canPage: false, canSort: false);
+
+
+                            @grid.GetHtml(
+                         tableStyle: "striped-table",
+                         headerStyle: "flip-content",
+
+                         columns: new[]{
+
+
+                           grid.Column("PostName",header: "Post"),
+                           grid.Column("OfferDiscountAmt",header: "Discount"),
+                           grid.Column("OfferCategory.CategoryName",header: "Category")
+                            },
+                                                                             mode: WebGridPagerModes.All
+                                                                             );
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="card-panel red lighten-3 white-text">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                    <strong>Warning!</strong> No Offer Found!!!!
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @if (!string.IsNullOrEmpty(Session["UserRole"].ToString()) && Session["UserRole"].ToString().ToLower().Contains("administrator"))
+                    {
+                        <div class="col-sm-12 data-credt-panel">
+                            <div class="row">
+                                <span class="teal-text black-text"><i class="mdi-action-assignment-ind"></i>Created By : @Model.Location.SysUser.UserId</span>
+                                <span class="teal-text black-text"><i class="mdi-action-alarm-add"></i>Created On : @Model.Location.CreatedOn.ToString("dd-MMM-yyyy hh:mm:ss")</span>
+                            </div>
+                            @if (Model.Location.ModifiedBy.HasValue)
+                            {
+                                <div class="row">
+                                    <span class="teal-text black-text"><i class="mdi-action-assignment-ind"></i>Modified By : @Model.Location.SysUser1.UserId</span>
+                                    <span class="teal-text black-text"><i class="mdi-action-alarm-add"></i>Modified On :@Model.Location.ModifiedOn.Value.ToString("dd-MMM-yyyy hh:mm:ss")</span>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="card-reveal">
+                @Html.AntiForgeryToken()
+                @using (Html.BeginForm("UpdateLocation", "Location", FormMethod.Post, new { @class = "form" }))
+                {
+                    @Html.HiddenFor(m => m.Location.ID)
+                    @Html.HiddenFor(m => m.Location.CreatedBy)
+                    @Html.HiddenFor(m => m.Location.CreatedOn)
+                    @Html.HiddenFor(m => m.Location.ModifiedBy)
+                    @Html.HiddenFor(m => m.Location.ModifiedOn)
+                    <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i></span>
+                    <div class="col-sm-2 pull-right">
+                        <button class="btn waves-effect waves-light right " type="submit" name="action">Save<i class="mdi-content-save left"></i></button>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <i class="mdi-action-receipt prefix"></i>
+                            @Html.TextBoxFor(m => m.Location.LocationName, new { id = "LocationName", @class = "validate", placeholder = "Enter Location Name" })
+                            <label for="LocationName" class="active">Location Name</label>
+                            @Html.ValidationMessageFor(m => m.Location.LocationName, null, new { @class = "card-panel red display" })
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="switch">
+                            <span class="caption"> <i class="mdi-action-verified-user"></i> Active </span>
+                            @if (@Model.Location.IsActive)
+                            {
+                                <label>
+                                    NO
+                                    <input checked="checked" data-val="@Model.Location.IsActive" id="chkIsActive" name="chkIsActive" type="checkbox">
+                                    <span class="lever"></span> YES
+                                </label>
+                            }
+                            else
+                            {
+                                <label>
+                                    NO
+                                    <input data-val="@Model.Location.IsActive" id="chkIsActive" name="chkIsActive" type="checkbox">
+                                    <span class="lever"></span> YES
+                                </label>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    }
+</div>

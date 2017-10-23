@@ -1,0 +1,114 @@
+﻿@model OfferWebSystem.Models.UserMenuModel
+
+
+<div class="navbar-fixed">
+    <nav class="teal darken-2">
+        <div class="nav-wrapper">
+            <h1 class="logo-wrapper">
+                <a href="@Url.Action("Index","Dashboard")" class="brand-logo darken-1"><img src="~/Content/ImageSys/materialize-logo.png" alt="materialize logo"></a>
+                <a href="#" data-activates="slide-out" class="button-collapse"><i class="mdi-action-view-headline"></i></a>
+                <span class="logo-text">Discount</span>
+            </h1>
+            <ul id="slide-out" class="side-nav">
+                <li><img src="~/Content/ImageSys/materialize-logo.png" alt="materialize logo"></li>
+                <li class="divider"></li>
+                <li>
+                    <a href="@Url.Action("Index","Dashboard")" class="waves-effect waves-block waves-light"><i class="mdi-action-dashboard large"></i>Dashboard</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="@Url.Action("Index","Post")" class="waves-effect waves-block waves-light"><i class="mdi-maps-local-offer large"></i>Discount Post</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="@Url.Action("Index","Outlet")" class="waves-effect waves-light collection-item"><i class="mdi-action-store large"></i> Outlet</a>
+                </li>
+                <li class="divider"></li>
+                @if (Model.UserDetail != null && Model.UserDetail.SysEnum.EnumName.ToLower().Contains("administrator"))
+                {
+                    <li>
+                        <a href="@Url.Action("Index","Location")" class="waves-effect waves-light collection-item"><i class="mdi-maps-place large"></i> Location</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="@Url.Action("Index","Category")" class="waves-effect waves-light collection-item"><i class="mdi-action-class large"></i> Category</a>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="@Url.Action("Index","User")" class="waves-effect waves-light collection-item"><i class="mdi-social-people large"></i>System Users</a>
+                    </li>
+                }
+                <li class="divider"></li>
+                <li>
+                    <i class="mdi-action-face-unlock left green-text" style="margin-left: 1%;"></i>
+                    <a href="@Url.Action("UserProfile","User")">Profile</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <i class="mdi-maps-directions left red-text" style="margin-left: 1%;"></i>
+                    <a href="@Url.Action("LogOut","SignIn")" class="collection-item">Logout</a>
+                </li>
+            </ul>
+
+            <ul class="right hide-on-med-and-down">
+
+                <li>
+                    <a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen tooltipped" data-position="bottom" data-delay="50" data-tooltip="Full Screen"><i class="mdi-action-settings-overscan"></i></a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Dashboard")" class="waves-effect waves-block waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Dashboard"><i class="mdi-action-dashboard large"></i></a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Post")" class="waves-effect waves-block waves-light tooltipped" data-position="bottom" data-delay="50" data-tooltip="Discount Post"><i class="mdi-maps-local-offer large"></i></a>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Outlet")" class="waves-effect waves-light collection-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="Outlet"><i class="mdi-action-store large"></i></a>
+                </li>
+                @if (Model.UserDetail != null && Model.UserDetail.SysEnum.EnumName.ToLower().Contains("administrator"))
+                {
+                    <li>
+                        <a href="@Url.Action("Index","Location")" class="waves-effect waves-light collection-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="Location"><i class="mdi-maps-place large"></i></a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","Category")" class="waves-effect waves-light collection-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="Category"><i class="mdi-action-class large"></i></a>
+                    </li>
+
+                    <li>
+                        <a href="@Url.Action("Index","User")" class="waves-effect waves-light collection-item tooltipped" data-position="bottom" data-delay="50" data-tooltip="System Users"><i class="mdi-social-people large"></i></a>
+                    </li>
+                }
+
+                <li>
+                    <a class="dropdown-button white-text waves-effect waves-block waves-light" href="#!" data-activates="ddUserOption">@Model.UserDetail.UserId<i class="mdi-hardware-keyboard-arrow-down right"></i></a>
+                </li>
+
+            </ul>
+
+        </div>
+    </nav>
+</div>
+<!-- Dropdown Structure -->
+<ul id="ddUserOption" class="dropdown-content collection">
+    <li>
+        <i class="mdi-action-face-unlock left green-text" style="margin-left: 1%;"></i>
+        <a href="@Url.Action("UserProfile","User")">Profile</a>
+    </li>
+    <li class="divider"></li>
+    <li>
+        <i class="mdi-maps-directions left red-text" style="margin-left: 1%;"></i>
+        <a href="@Url.Action("LogOut","SignIn")" class="collection-item">Logout</a>
+    </li>
+</ul>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".dropdown-button").dropdown({
+            constrain_width: false
+        });
+        $(".button-collapse").sideNav();
+        $('.tooltipped').tooltip({ delay: 50 });
+
+    });
+
+</script>

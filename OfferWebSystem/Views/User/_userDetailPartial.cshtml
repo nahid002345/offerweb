@@ -1,0 +1,220 @@
+﻿@model OfferWebSystem.EFnClass.SysUser
+
+
+<script src="~/Scripts/fileinput.js"></script>
+<div id="profile-card" class="card">
+    <div class="card-panel red">
+        <span class="card-title activator white-text text-darken-4">@Model.UserId</span>
+    </div>
+    <div class="card-content">
+        @if (!string.IsNullOrEmpty(Model.CompanyLogoUrl) && File.Exists(Server.MapPath(Model.CompanyLogoUrl)))
+        {
+
+            <img class="circle responsive-img activator card-profile-image" src="@Model.CompanyLogoUrl" alt="sample" data-caption="@Model.UserId">
+            <p></p>
+
+        }
+        <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right">
+            <i class="mdi-editor-mode-edit"></i>
+        </a>
+        <div class="col-sm-8">
+            <p>@Model.SysEnum.EnumName</p>
+            <p><i class="mdi-social-domain"></i> @Model.CompanyName</p>
+            <p><i class="mdi-communication-email"></i> @Model.Email</p>
+            <p><i class="mdi-communication-call"></i> @Model.ContactNo</p>
+            <p><i class="mdi-social-public"></i> @Model.Website</p>
+            <div class="row">
+                <div class="switch">
+                    <span class="caption"> <i class="mdi-action-verified-user"></i> Active </span>
+                    <label>
+                        NO
+                        @Html.CheckBoxFor(m => m.IsActive, new { @name = "chkIsActive", id = "chkIsActive", @disabled = "disabled" })
+                        <span class="lever"></span> YES
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4 right panel">
+            @*<div class="panel-heading">Image</div>*@
+            @*<div class="card-content center  black-text col-sm-12" style="padding:0px;">
+
+                    @if (!string.IsNullOrEmpty(Model.CompanyLogoUrl) && File.Exists(Server.MapPath(Model.CompanyLogoUrl)))
+                    {
+
+                        <img class="materialboxed circle center-align bordered" width="150" height="150" src="@Model.CompanyLogoUrl" alt="sample" data-caption="@Model.UserId">
+                        <p></p>
+
+                    }
+                </div>*@
+        </div>
+    </div>
+    <div class="card-reveal">
+        @Html.AntiForgeryToken()
+        @using (Html.BeginForm("UpdateUserProfile", "User", FormMethod.Post, new { @class = "profile-form", enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(t => t.ID)
+            @Html.HiddenFor(t => t.CreatedBy)
+            @Html.HiddenFor(t => t.CreatedOn)
+            @Html.HiddenFor(t => t.ModifiedBy)
+            @Html.HiddenFor(t => t.IsActive)
+            @Html.HiddenFor(t => t.UserId)
+            @Html.HiddenFor(t => t.UserType)
+            <div class="row">
+                <div class="col-sm-12">
+                    <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i>@Model.UserId </span>
+                </div>
+            </div>
+
+            <div class="col-sm-2 pull-right">
+                <button class="btn waves-effect waves-light right " type="submit" name="action">Save<i class="mdi-content-save left"></i></button>
+            </div>
+                            <p>@Model.SysEnum.EnumName</p>
+                            if (!string.IsNullOrEmpty(Session["UserRole"].ToString()) && Session["UserRole"].ToString().ToLower().Contains("administrator"))
+                            {
+                                <div class="row">
+                                    <div class="input-field col s12 m12 l12">
+                                        <i class="mdi-action-class prefix"></i>
+                                        @Html.DropDownListFor(m => m.UserType, (IEnumerable<SelectListItem>)ViewBag.UserTypeList, "Select User Type", new { @class = "browser-left-icon-modal browser-default" })
+                                        <label for="offerCategory" class="active">User Type</label>
+                                        @Html.ValidationMessageFor(m => m.UserType, null, new { @class = "card-panel red display" })
+                                    </div>
+                                </div>
+                            }
+                            <div class="row">
+                                <div class="input-field col s12 m12 l12">
+                                    <i class="mdi-social-domain prefix"></i>
+                                    @Html.TextBoxFor(m => m.CompanyName, new { id = "userCompanyName", @class = "validate", placeholder = "Enter Company Name" })
+                                    <label for="userCompanyName" class="active">Company Name</label>
+                                    @Html.ValidationMessageFor(m => m.CompanyName, null, new { @class = "card-panel red display" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12 m12 l12">
+                                    <i class="mdi-communication-email prefix"></i>
+                                    @Html.TextBoxFor(m => m.Email, new { id = "userEmail", @class = "validate", placeholder = "Enter Email Address", @type = "email" })
+                                    <label for="userEmail" class="active">Email</label>
+                                    @Html.ValidationMessageFor(m => m.CompanyName, null, new { @class = "card-panel red display" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12 m12 l12">
+                                    <i class="mdi-communication-call prefix"></i>
+                                    @Html.TextBoxFor(m => m.ContactNo, new { id = "userContactNo", @class = "validate", placeholder = "Enter Contact No", @type = "number" })
+                                    <label for="userContactNo" class="active">Contact No</label>
+                                    @Html.ValidationMessageFor(m => m.ContactNo, null, new { @class = "card-panel red display" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="input-field col s12 m12 l12">
+                                    <i class="mdi-social-public prefix"></i>
+                                    @Html.TextBoxFor(m => m.Website, new { id = "userWebsite", @class = "validate", placeholder = "Enter Web Address" })
+                                    <label for="userContactNo" class="active">Website</label>
+                                    @Html.ValidationMessageFor(m => m.Website, null, new { @class = "card-panel red display" })
+                                </div>
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+                                    <input id="ctrlPostImage" name="ctrlPostImage" type="file" multiple class="file-loading" data-preview-file-type="any" accept="image/*" />
+                                </div>
+
+                                @*<div class="switch">
+                                        Active ? :
+                                        <label>
+                                            NO
+                                            @Html.CheckBoxFor(m => m.IsActive, new { @name = "chkIsActive", id = "chkIsActive" })
+                                            <span class="lever"></span> YES
+                                        </label>
+                                    </div>*@
+                            </div>
+        }
+
+
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var imagePost;
+        var imgPath = '@Model.CompanyLogoUrl';
+        if (imgPath != '') {
+            $.ajax({
+                url: '@Model.CompanyLogoUrl',
+                success: function (data, textStatus) {
+                    imagePost = true;
+
+                    $("#ctrlPostImage").fileinput({
+                        initialPreviewShowDelete: true,
+                        overwriteInitial: true,
+                        initialPreview: [
+                            "<img src='@Model.CompanyLogoUrl' class='file-preview-image' alt='PostImage'>"
+                        ],
+                        dataType: 'json',
+                        uploadAsync: false,
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: "Pick Image",
+                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                        removeClass: "btn btn-danger",
+                        removeLabel: "Delete",
+                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                        showUpload: false,
+                        uploadClass: "btn btn-info",
+                        uploadLabel: "Upload",
+                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+                        allowedFileExtensions: ["jpg", "gif", "png"],
+                        minImageWidth: 50,
+                        minImageHeight: 50,
+                        maxFileCount: 1
+
+                    });
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    imagePost = false;
+
+                    $("#ctrlPostImage").fileinput({
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: "Pick Image",
+                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                        removeClass: "btn btn-danger",
+                        removeLabel: "Delete",
+                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                        showUpload: false,
+                        uploadClass: "btn btn-info",
+                        uploadLabel: "Upload",
+                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+                        allowedFileExtensions: ["jpg", "gif", "png"],
+                        minImageWidth: 50,
+                        minImageHeight: 50,
+                        maxFileCount: 1
+
+                    });
+                }
+            });
+        }
+        else {
+            $("#ctrlPostImage").fileinput({
+                previewFileType: "image",
+                browseClass: "btn btn-success",
+                browseLabel: "Pick Image",
+                browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                removeClass: "btn btn-danger",
+                removeLabel: "Delete",
+                removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                showUpload: false,
+                uploadClass: "btn btn-info",
+                uploadLabel: "Upload",
+                uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+                allowedFileExtensions: ["jpg", "gif", "png"],
+                minImageWidth: 50,
+                minImageHeight: 50,
+                maxFileCount: 1
+
+            });
+        }
+
+
+    });
+</script>

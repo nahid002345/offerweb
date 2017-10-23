@@ -1,0 +1,76 @@
+﻿@model OfferWebSystem.Models.LogIn
+
+@{
+    ViewBag.Title = "Login | Discount Buzz";
+    Layout = "~/Views/Shared/_LayoutSign.cshtml";
+}
+
+
+<div id="login-page" class="row">
+    <div class="col s12 card-panel">
+        @Html.AntiForgeryToken()
+        @using (Html.BeginForm("SignInSubmit", "SignIn", FormMethod.Post, new { @class = "login-form" }))
+        {
+
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <img src="~/Content/ImageSys/login-logo.png" alt="" class="circle responsive-img valign profile-image-login">
+                    <p class="center login-form-text">Discount Buzz </p>
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="mdi-social-person-outline prefix"></i>
+                    @Html.TextBoxFor(m => m.USERID, new { id = "username", @class = "validate", autocomplete = "off", name = "UserID" })
+                    <label for="username" class="center-align">Username</label>
+                    @Html.ValidationMessageFor(m => m.USERID, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+            <div class="row margin">
+                <div class="input-field col s12">
+                    <i class="mdi-action-lock-outline prefix"></i>
+                    @Html.PasswordFor(m => m.USERPASSWORD, new { id = "password", @class = "validate", autocomplete = "off", name = "UserPassword" })
+                    <label for="password">Password</label>
+                    @Html.ValidationMessageFor(m => m.USERPASSWORD, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <button type="submit" class="btn waves-effect waves-light col s12">Login <span class="fa fa-unlock"></span></button>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s6 m6 l6">
+                    <p class="margin medium-small">@Html.ActionLink("Register Now!", "Register","SignIn")</p>
+                </div>
+                <div class="input-field col s6 m6 l6">
+                    <p class="margin right-align medium-small">@Html.ActionLink("Forgot password ?", "ForgetPassword", "SignIn")</p>
+                </div>
+
+            </div>
+            if (TempData["SignMsg"] != null)
+            {
+                <div class="row">
+
+                    <div class="card-panel red">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                        <strong>Warning!</strong> @TempData["SignMsg"].ToString()
+                    </div>
+                </div>
+            }
+
+            if (TempData["SignMsgSuccess"] != null)
+            {
+                <div class="row">
+
+                    <div class="card-panel green">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                        <strong>Warning!</strong> @TempData["SignMsgSuccess"].ToString()
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>
+

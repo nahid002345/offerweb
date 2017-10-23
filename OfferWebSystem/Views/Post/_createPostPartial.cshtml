@@ -1,0 +1,185 @@
+﻿@model OfferWebSystem.EFnClass.OffersInfo
+<script src="~/Scripts/fileinput.js"></script>
+<div class="col-sm-12">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ddlLocation").change(function () {
+                $('#post-outlet-list').empty();
+                var selectedValue = $("#ddlLocation").val();
+                if (selectedValue != '') {
+                    $.ajax({
+                        type: 'GET',
+                        url: '@Url.Action("GetAvailableOutletList", "Post")',
+                        dataType: 'html',
+                        data: { OfferId: @Model.ID, LocId: selectedValue },
+                        success: function (data) {
+                            $('#post-outlet-list').html(data);
+                        },
+                        error: function (ex) {
+                            alert('Failed to retrieve data.' + ex);
+                        }
+                    });
+                }
+            });
+
+            $('.datepicker').pickadate({
+                closeOnSelect: true,
+                closeOnClear: true,
+                selectMonths: true,
+                selectYears: true,
+                format: 'dd/mmm/yyyy',
+            });
+            $('.rating-loading').rating({ displayOnly: true, step: 0.5 });
+
+
+
+            $("#ctrlPostImage").fileinput({
+                previewFileType: "image",
+                browseClass: "btn btn-success",
+                browseLabel: "Pick Image",
+                browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                removeClass: "btn btn-danger",
+                removeLabel: "Delete",
+                removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                showUpload: false,
+                uploadClass: "btn btn-info",
+                uploadLabel: "Upload",
+                uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+                allowedFileExtensions: ["jpg", "gif", "png"],
+                minImageWidth: 50,
+                minImageHeight: 50,
+                maxFileCount: 1
+
+            });
+
+        });
+
+    </script>
+    <div class="card-panel">
+        @Html.AntiForgeryToken()
+        @using (Html.BeginForm("InsertPost", "Post", FormMethod.Post, new { @class = "login-form", enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(m => m.ID, new { @name = "OfferId" })
+            @*@Html.HiddenFor(m => m.OfferFeatureVal)*@
+            @*@Html.HiddenFor(m => m.IsActive)*@
+            @Html.HiddenFor(m => m.CreatedBy)
+            @Html.HiddenFor(m => m.CreatedOn)
+            @Html.HiddenFor(m => m.ModifiedBy)
+            @Html.HiddenFor(m => m.ModifiedOn)
+            @Html.HiddenFor(m => m.OfferStatus)
+
+    <span class="card-title caption-uppercase grey-text text-darken-4">Discount Post Detail <i class="mdi-navigation-close right"></i></span>
+            
+            <div class="col-sm-2 pull-right">
+                <button class="btn waves-effect waves-light right " type="submit" name="action">Save<i class="mdi-content-save left"></i></button>
+            </div>
+
+            
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <i class="mdi-action-receipt prefix"></i>
+                    @Html.TextBoxFor(m => m.PostName, new { id = "offerPost_prefix2", @class = "validate", placeholder = "Enter Discount Post Title" })
+                    <label for="PostName" class="active">Discount Post Title</label>
+                    @Html.ValidationMessageFor(m => m.PostName, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <i class="mdi-maps-local-offer prefix"></i>
+                    @Html.TextBoxFor(m => m.OfferDiscountAmt, new { id = "offerPost_discount", @class = "validate", placeholder = "Enter Discount" })
+                    <label for="offerPost_discount" class="active">Discount </label>
+                    @Html.ValidationMessageFor(m => m.OfferDiscountAmt, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    <i class="mdi-action-class prefix"></i>
+                    @Html.DropDownListFor(m => m.OfferCat, (IEnumerable<SelectListItem>)ViewBag.CatList, "Select Category", new { @class = "browser-left-icon " })
+                    <label for="offerCategory" class="active">Category</label>
+                    @Html.ValidationMessageFor(m => m.OfferCat, null, new { @class = "card-panel red display" })
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <i class="mdi-maps-place prefix"></i>
+                    @Html.DropDownListFor(m => m.OfferLoc, (IEnumerable<SelectListItem>)ViewBag.LocList, "Select Location", new { @class = "browser-left-icon ", id = "ddlLocation" })
+                    <label for="offerLocation" class="active">Location</label>
+                    @Html.ValidationMessageFor(m => m.OfferLoc, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    <i class="mdi-notification-event-available prefix"></i>
+                    @Html.TextBoxFor(m => m.OfferStartDate, new { id = "offeStartDate", @class = "datepicker", placeholder = "e.g. 20/Feb/2016", @type = "date", @Value = Model.OfferStartDate.ToString("dd/MMM/yyyy") })
+                    <label for="offeStartDate" class="active">Start Date</label>
+                    @Html.ValidationMessageFor(m => m.OfferStartDate, null, new { @class = "card-panel red display" })
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <i class="mdi-notification-event-busy prefix"></i>
+                    @Html.TextBoxFor(m => m.OfferEndDate, new { @class = "datepicker", placeholder = "e.g. 20/Feb/2016", @type = "date", @Value = Model.OfferEndDate.ToString("dd/MMM/yyyy") })
+                    <label for="offeEndDate" class="active">End Date</label>
+                    @Html.ValidationMessageFor(m => m.OfferEndDate, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <i class="mdi-action-description prefix"></i>
+                    @Html.TextAreaFor(m => m.OfferDetails, new { id = "offerPost_prefix2", @class = "materialize-textarea", placeholder = "Description of Discounts" })
+                    <label for="PostName" class="active">Discount Details</label>
+                    @Html.ValidationMessageFor(m => m.PostName, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+            <div class="row">
+                @if (!string.IsNullOrEmpty(Session["UserRole"].ToString()) && Session["UserRole"].ToString().ToLower().Contains("administrator"))
+                {
+                <div class="input-field col s12 m6 l6">
+                    <i class="mdi-action-receipt prefix"></i>
+                    @Html.DropDownListFor(m => m.OfferFeatureVal, (IEnumerable<SelectListItem>)ViewBag.FeatureList, "Select Feature", new { @class = "browser-left-icon" })
+                    <label for="postFeature" class="active">Feature</label>
+                    @Html.ValidationMessageFor(m => m.OfferFeatureVal, null, new { @class = "card-panel red display" })
+                </div>
+                }
+                else
+                {
+                    <div class="input-field col s12 m6 l6">
+                        <i class="mdi-action-receipt prefix"></i>
+                        @Html.DropDownListFor(m => m.OfferFeatureVal, (IEnumerable<SelectListItem>)ViewBag.FeatureList, "Select Feature", new { @class = "browser-left-icon" })
+                        <label for="postFeature" class="active">Feature</label>
+                        @Html.ValidationMessageFor(m => m.OfferFeatureVal, null, new { @class = "card-panel red display" })
+                    </div>
+                }
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <h6 class="header"><span class="transparent bold"><i class="mdi-action-store cyan-text"></i></span><b>Available Outlet</b></h6>
+                    <div id="post-outlet-list">
+                        <div class="row">
+                            <div class="card-panel red lighten-3 white-text">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                <strong>Warning!</strong> No Outlet Selected!!!!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="col-md-12">
+                        <input id="ctrlPostImage" name="ctrlPostImage" type="file" multiple class="file-loading" data-preview-file-type="any" accept="image/*" />
+                    </div>
+                    @*<input type="file" name="files[]" id="js-upload-files" multiple webkitdirectory mozdirectory msdirectory odirectory directory>*@
+                </div>
+            </div>
+            <div class="row hidden">
+                <div class="col-sm-6">
+                    <div class="switch">
+                        <span class="caption"> <i class="mdi-action-verified-user"></i> Publish </span>
+                        <label>
+                            NO
+                            <input checked="checked" data-val="@Model.IsActive" id="chkIsActive" name="chkIsActive" type="checkbox" disabled="disabled">
+                            <span class="lever"></span> YES
+                        </label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

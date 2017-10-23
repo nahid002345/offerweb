@@ -1,0 +1,115 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="description" content="Discount Buzz System BD">
+    <meta name="keywords" content="Discount, Offer">
+    <title>@ViewBag.Title</title>
+    <!-- Favicons-->
+    <link rel="icon" href="~/Content/ImageSys/favicon/favicon-32x32.png" sizes="32x32">
+    <!-- Favicons-->
+    <link rel="apple-touch-icon-precomposed" href="~/Content/ImageSys/favicon/apple-touch-icon-152x152.png">
+    <!-- For iPhone -->
+    <meta name="msapplication-TileColor" content="#00bcd4">
+    <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+    <!-- For Windows Phone -->
+    <!-- CORE CSS-->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/themeCSS/materialize.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="~/Content/themeCSS/style.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+    <link href="~/Content/themeCSS/prism.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="~/Content/themeCSS/perfect-scrollbar.css" type="text/css" rel="stylesheet" media="screen,projection">
+    <link href="~/Content/Site.css" type="text/css" rel="stylesheet">
+
+
+
+    <script type="text/javascript" src="~/Scripts/jquery-1.11.2.min.js"></script>
+    @*<script src="~/Scripts/jquery-migrate.min.js" type="text/javascript"></script>*@
+    <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/jquery-ui.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js" type="text/javascript"></script>
+
+
+</head>
+<body>
+    <!-- Start Page Loading -->
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    
+
+    <div id="main" class="col s12 m6 l3 centered" style="padding-left: 1%; width: 99%; position: absolute;">
+        <!-- START WRAPPER -->
+        <div class="wrapper">
+            <!-- START LEFT SIDEBAR NAV-->
+            @*<aside id="left-sidebar-nav">
+                @if (Session["User"] != null)
+                {
+                    Html.RenderAction("MenuDetails", "Dashboard");
+                }
+            </aside>*@
+            <section id="content">
+
+                <!--start container-->
+                @RenderBody()
+
+            </section>
+        </div>
+    </div>
+
+
+
+    <!-- ================================================
+      Scripts
+      ================================================ -->
+   
+
+
+    <!--materialize js-->
+    <script type="text/javascript" src="~/Scripts/materialize.js"></script>
+
+    <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+    <script type="text/javascript" src="~/Scripts/plugins.js"></script>
+
+
+    <script type="text/javascript" src="~/Scripts/Custom.js"></script>
+
+    <div class="row center">
+        @if (TempData["SuccessMsg"] != null)
+        {
+            <script type="text/javascript">
+                Materialize.toast('@TempData["SuccessMsg"].ToString().Replace(@"\r\n", @"")', 4000)
+            </script>
+            @*<div class="card-panel light-green white-text">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa fa-check"></span></strong>@TempData["SuccessMsg"].ToString()
+                </div>*@
+        }
+
+        @if (TempData["ErrorMsg"] != null)
+        {
+            <script type="text/javascript">
+                Materialize.toast('@TempData["ErrorMsg"].ToString()', 4000)
+            </script>
+            @*<div class="card-panel red white-text">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa  fa-times"></span></strong>@TempData["ErrorMsg"].ToString()
+                </div>*@
+        }
+
+    </div>
+
+    
+
+</body>
+</html>

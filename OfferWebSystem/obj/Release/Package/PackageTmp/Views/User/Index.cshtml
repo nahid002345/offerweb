@@ -1,0 +1,82 @@
+﻿@model List<OfferWebSystem.EFnClass.SysUser>
+@{
+    ViewBag.Title = "System User | Discount Buzz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mail-app" class="section">
+
+    <div class="row z-depth-1">
+
+        <nav class="light-blue">
+            <div class="nav-wrapper">
+                <div class="left col s12 m6 l6">
+                    <ul>
+                        <li>
+                            <i class="mdi-social-people"></i>
+                        </li>
+                        <li>
+                            <h4 class="header"> System Users</h4>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m6 l6">
+                    <ul class="right">
+                        <li class="search-out">
+                            <input type="text" class="search-out-text" id="user-search" data-url="@Url.Action("GetUserByUserTypeSearchKey", "User")">
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="waves-effect waves-block waves-light show-search"><i class="mdi-action-search"></i></a>
+                        </li>
+                        @*<li>
+                                <a href="#" id="list" class="waves-effect waves-block white-text right"><i class="mdi-action-view-list"></i></a>
+                            </li>
+                            <li>
+                                <a href="#" id="grid" class="waves-effect waves-block white-text right"><i class="mdi-action-view-module"></i></a>
+                            </li>*@
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr />
+        <div class="col-sm-3 badge-example left-select-panel">
+            <div class="row">
+                <h4 class="header">User Type</h4>
+                <ul id="task-card" class="collection with-header">
+                    @foreach (OfferWebSystem.EFnClass.SysEnum oUserType in Model.Select(x => x.SysEnum).Distinct().ToList())
+                    {
+                        @*<li class="collection-item">
+                                <a href="#!" class="collection-item">@oCat.CategoryName<span class="badge blue white-text">@oCat.OffersInfoes.Where(t => t.CreatedBy == Model[0].CreatedBy).Count() </span></a>
+                            </li>*@
+                        <li class="collection-item dismissable">
+                            <input type="checkbox" id="chkcat_@oUserType.ID" class="chkUserType" data-id="@oUserType.ID" value="@oUserType.ID" data-url="@Url.Action("GetUserByUserTypeSearchKey", "User")" />
+                            <label for="chkcat_@oUserType.ID">
+                                @oUserType.EnumName <span class="badge blue white-text">@oUserType.SysUsers.Count() </span>
+                            </label>
+                        </li>
+
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-sm-9 right">
+            <div class="preloader-wrapper center-align hide" id="user-list-loader">
+                <div class="spinner-layer spinner-red-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="user-full-list">
+                @Html.Partial("_userListPartial", Model)
+            </div>
+        </div>
+    </div>
+</div>

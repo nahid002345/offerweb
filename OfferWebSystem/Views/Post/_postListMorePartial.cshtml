@@ -1,0 +1,124 @@
+﻿@model List<OfferWebSystem.EFnClass.OffersInfo>
+@if (Model != null && Model.Count > 0)
+{
+    foreach (var item in Model.Take(10))
+    {
+        <li class="card card-post">
+            <div class="cbp-vm-image waves-effect waves-block waves-light">
+                <img class="circle" src="@item.OfferImagePath" alt="">
+            </div>
+            <div class="cbp-vm-title black-text truncate">
+                @item.PostName
+                <div class="cbp-vm-list-details">
+                    <span class="transparent bold"><i class="mdi-maps-place blue-text"></i></span><b>@item.OfferLocation.LocationName</b>
+                    <span class="transparent"><i class="mdi-action-store cyan-text"></i></span><b class="badge caption cyan darken-3"> @item.OfferAvailOutlets.Count</b>
+                    <span class="transparent"><i class="mdi-action-class deep-purple-text"></i></span><b>@item.OfferCategory.CategoryName</b>
+                </div>
+            </div>
+
+
+            <div class="cbp-vm-details" style="font-size: 1.2em; ">
+                <span class="truncate col-sm-12 bold" style="text-align:left;"><i class="mdi-maps-local-offer green-text"></i><b> @item.OfferDiscountAmt</b></span>
+                <div class="cbp-vm-list-details">
+                    <span class="transparent"><i class="mdi-action-visibility brown-text"></i></span><b class="badge caption brown darken-3"> @item.OfferViews.Count</b>
+                    <span class="transparent bold"><i class="mdi-action-question-answer red-text"></i></span><b class="badge caption red lighten-2"> @item.OfferReviews.Count</b>
+                    <span class="transparent bold"><i class="mdi-action-thumb-up blue-text"></i></span><b class="badge caption blue"> @item.OfferReviews.Where(t => t.OfferIsFavorite.GetValueOrDefault(false) == true).ToList().Count</b>
+                    <span class="transparent "><i class="mdi-action-favorite-outline green-text"></i></span><b class="badge caption green"> @item.OfferReviews.Where(t => t.OfferIsFollow.GetValueOrDefault(false) == true).ToList().Count()</b>
+                    @if (@item.OfferReviews.Count > 0)
+                    {
+                        <input id="input-3-xs" type="number" value="@(item.OfferReviews.Sum(t => t.OfferReview1) / @item.OfferReviews.Count())" data-size="xs" class="rating-loading" data-min="0" data-max="10">
+                    }
+                    else
+                    {
+                        <input id="input-3-xs" type="number" value="0" data-size="xs" class="rating-loading" data-min="0" data-max="10">
+                    }
+                </div>
+            </div>
+            <div class="col-sm-2 right cbp-vm-list-details">
+                <div class="row">
+                    <a class="modal-trigger waves-effect waves-light btn-info btn center btnPostDetail" id="btnPostDetail" data-id="@item.ID" href="#modal1"> Detail </a>
+                </div>
+            </div>
+            @*for list view only*@
+
+
+            <div class="cbp-vm-title">
+                <div class="card-reveal">
+                    <div style="height: 20%;" class="cbp-list-none">
+                        <a class="modal-trigger waves-effect waves-light btn-info btn center btnPostDetail" id="btnPostDetail" data-id="@item.ID" href="#modal1"> Detail </a>
+                    </div>
+                    <div class="card-content">
+                        <span class="transparent bold"><i class="mdi-maps-place blue-text"></i></span><b>@item.OfferLocation.LocationName</b>
+                        <span class="transparent"><i class="mdi-action-store cyan-text"></i></span><b class="badge caption cyan darken-3"> @item.OfferAvailOutlets.Count</b>
+                        <span class="transparent"><i class="mdi-action-class deep-purple-text"></i></span><b>@item.OfferCategory.CategoryName</b>
+                    </div>
+                    <div class="card-content">
+                        <span class="transparent"><i class="mdi-action-visibility brown-text"></i></span><b class="badge caption brown darken-3"> @item.OfferViews.Count</b>
+                        <span class="transparent bold"><i class="mdi-action-question-answer red-text"></i></span><b class="badge caption red lighten-2"> @item.OfferReviews.Count</b>
+                        <span class="transparent bold"><i class="mdi-action-thumb-up blue-text"></i></span><b class="badge caption blue"> @item.OfferReviews.Where(t => t.OfferIsFavorite.GetValueOrDefault(false) == true).ToList().Count</b>
+                        <span class="transparent "><i class="mdi-action-favorite-outline green-text"></i></span><b class="badge caption green"> @item.OfferReviews.Where(t => t.OfferIsFollow.GetValueOrDefault(false) == true).ToList().Count()</b>
+                        <span class="transparent truncate "><i class="mdi-action-grade black-text"></i></span>
+                        @if (@item.OfferReviews.Count > 0)
+                        {
+                            <input id="input-3-xs" type="number" value="@(item.OfferReviews.Sum(t => t.OfferReview1) / @item.OfferReviews.Count())" data-size="xs" class="rating-loading" data-min="0" data-max="10">
+                        }
+                        else
+                        {
+                            <input id="input-3-xs" type="number" value="0" data-size="xs" class="rating-loading" data-min="0" data-max="10">
+                        }
+                    </div>
+
+                </div>
+            </div>
+
+        </li>
+    }
+}
+else
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Materialize.toast('No More Posts Available! ', 4000)
+        });
+    </script>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.rating-loading').rating({ displayOnly: true, step: 0.5 });
+        $('.btnPostDetail').click(function (data) {
+            $('#modal-post-detail').empty();
+            $('#modal1').openModal({
+                opacity: 0.5,
+                in_duration: 350,
+                out_duration: 250,
+                ready: undefined,
+                complete: undefined,
+                dismissible: true
+            });
+            //event.preventDefault();
+            //var $buttonClicked = $(this).find('a');
+            var postId = $(this).attr('data-id');
+            $('#modal-post-loader').removeClass('hide');
+            $('#modal-post-loader').addClass('active');
+            //  $('#post-loader').toggleClass('show');
+            $.ajax({
+                cache: false,
+                type: "GET",
+                url: "@(Url.Action("GetPostDetail", "Post"))",
+                data: { "postId": postId },
+                success: function (data) {
+                    $('#modal-post-detail').html(data);
+                    $.validator.unobtrusive.parse($('#modal-post-detail'));
+                    //$('#modal-post-loader').removeClass('active');
+                    $('#modal-post-loader').addClass('hide');
+
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    //$('#modal-post-loader').removeClass('active');
+                    $('#modal-post-loader').addClass('hide');
+                    alert('Failed to load Information');
+                }
+            });
+        });
+    });
+</script>

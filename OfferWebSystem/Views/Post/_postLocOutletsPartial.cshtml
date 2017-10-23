@@ -1,0 +1,77 @@
+﻿@model List<OfferWebSystem.Models.CatLocAvailableOutlet>
+
+
+<div class="col s12 m12 l12">
+    @if (Model != null && Model.Count > 0)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#chkAvailOutletSelectAll").change(function () {
+                    $(".chkPostAvailOutlet").prop('checked', $(this).prop("checked"));
+                });
+            });
+        </script>
+        <div class="right">
+            <div class="switch">
+                <span class="caption">All </span>
+                <label>
+                    NO
+                    <input type="checkbox" id="chkAvailOutletSelectAll" class="chkPostAvailOutlet" value="0">
+                    <span class="lever"></span> YES
+                </label>
+            </div>
+        </div>
+
+        var grid = new WebGrid(Model, rowsPerPage: 10, canPage: false, canSort: false);
+
+
+        @grid.GetHtml(
+                         tableStyle: "striped-table",
+                         headerStyle: "flip-content",
+
+                         columns: new[]{
+
+
+                           grid.Column("outletName",header: "Outlet Name"),
+                           grid.Column("outletAddress",header: "Address"),
+                           grid.Column("outletLocation",header: "Location"),
+                           grid.Column(
+                        header: "Active ?",
+                        format:@<text>
+                            @if (item.outletIsActive == null || !item.outletIsActive)
+                            {
+                                <div class="switch">
+                                    <label>
+                                        NO
+                                        <input type="checkbox" id="chkAvailOutlet" class="chkPostAvailOutlet" name="chkAvailOutlet" value="@item.outletId">
+                                        <span class="lever"></span> YES
+                                    </label>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="switch">
+                                    <label>
+                                        NO
+                                        <input type="checkbox" id="chkAvailOutlet" class="chkPostAvailOutlet"  name="chkAvailOutlet" checked="checked" value="@item.outletId">
+                                        <span class="lever"></span> YES
+                                    </label>
+                                </div>
+                            }
+
+                        </text>
+                    )
+                            },
+                                                    mode: WebGridPagerModes.All
+                                                    );
+    }
+    else
+    {
+        <div class="row">
+            <div class="card-panel red lighten-3 white-text">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                <strong>Warning!</strong> No Outlets Found!!!!
+            </div>
+        </div>
+    }
+</div>

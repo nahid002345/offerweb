@@ -1,0 +1,377 @@
+﻿@model OfferWebSystem.Models.DashboardModel
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="mail-app" class="section">
+
+    <div class="row z-depth-1">
+        <nav class="light-blue">
+            <div class="nav-wrapper">
+                <div class="left col s12 m6 l6">
+                    <ul>
+                        <li>
+                            <i class="mdi-action-dashboard white-text"></i>
+                        </li>
+                        <li>
+                            <h4 class="header"> Dashboard</h4>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container">
+            <div class="section">
+                <div class="row">
+                    <div id="card-stats" class="seaction">
+                        <h4 class="header"><i class="mdi-action-assessment medium"></i>Summary</h4>
+                        <div class="row">
+                            <div class="col s12 m3 l2">
+                                <div class="card green bordered">
+                                    <div class="card-content white-text">
+                                        <div class="card-stats-left-panel">
+                                            <i class="mdi-image-style medium"></i>
+                                        </div>
+                                        <div class="card-stats-right-panel">
+                                            <p class="card-stats-title">Post</p>
+                                            <h4 class="card-stats-number bold header">@Model.UserTotalPost</h4>
+
+                                            @*<p class="card-stats-compare">
+                            <i class="mdi-hardware-keyboard-arrow-up"></i> 15% <span class="green-text text-lighten-5">from yesterday</span>
+                        </p>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col s12 m3 l2">
+                                <div class="card light-blue bordered">
+                                    <div class="card-content white-text">
+                                        <div class="card-stats-left-panel">
+                                            <i class="mdi-action-visibility medium"></i>
+                                        </div>
+                                        <div class="card-stats-right-panel">
+                                            <p class="card-stats-title">View</p>
+                                            <h4 class="card-stats-number bold header">@Model.UserTotalView</h4>
+
+                                            @*<p class="card-stats-compare">
+                            <i class="mdi-hardware-keyboard-arrow-up"></i> 15% <span class="green-text text-lighten-5">from yesterday</span>
+                        </p>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3 l2">
+                                <div class="card purple bordered">
+                                    <div class="card-content white-text">
+                                        <div class="card-stats-left-panel">
+                                            <i class="mdi-communication-forum medium"></i>
+                                        </div>
+                                        <div class="card-stats-right-panel">
+                                            <p class="card-stats-title">Reviews</p>
+                                            <h4 class="card-stats-number bold header">@Model.UserTotalReview</h4>
+
+                                            @*<p class="card-stats-compare">
+                            <i class="mdi-hardware-keyboard-arrow-up"></i> 15% <span class="green-text text-lighten-5">from yesterday</span>
+                        </p>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3 l2">
+                                <div class="card orange darken-2 bordered">
+                                    <div class="card-content white-text">
+                                        <div class="card-stats-left-panel">
+                                            <i class="mdi-action-thumb-up medium"></i>
+                                        </div>
+                                        <div class="card-stats-right-panel">
+                                            <p class="card-stats-title">Likes</p>
+                                            <h4 class="card-stats-number bold header">@Model.UserTotalLike</h4>
+
+                                            @*<p class="card-stats-compare">
+                            <i class="mdi-hardware-keyboard-arrow-up"></i> 15% <span class="green-text text-lighten-5">from yesterday</span>
+                        </p>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3 l2">
+                                <div class="card  indigo darken-2 bordered">
+                                    <div class="card-content white-text">
+                                        <div class="card-stats-left-panel">
+                                            <i class="mdi-action-turned-in-not medium"></i>
+                                        </div>
+                                        <div class="card-stats-right-panel">
+                                            <p class="card-stats-title">Follows</p>
+                                            <h4 class="card-stats-number bold header">@Model.UserTotalFollow</h4>
+
+                                            @*<p class="card-stats-compare">
+                            <i class="mdi-hardware-keyboard-arrow-up"></i> 15% <span class="green-text text-lighten-5">from yesterday</span>
+                        </p>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col s12 m3 l2">
+                                <div class="card  pink darken-2 bordered">
+                                    <div class="card-content white-text">
+                                        <div class="card-stats-left-panel">
+                                            <i class="mdi-action-stars medium"></i>
+                                        </div>
+                                        <div class="card-stats-right-panel">
+                                            <p class="card-stats-title">Avg. Rating</p>
+                                            <h4 class="card-stats-number bold header">@Model.UserTotalAverageRatings</h4>
+
+                                            @*<p class="card-stats-compare">
+                            <i class="mdi-hardware-keyboard-arrow-up"></i> 15% <span class="green-text text-lighten-5">from yesterday</span>
+                        </p>*@
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="divider"></div>
+                @if (Model.UserType.Contains("administrator"))
+                {
+                    <div class="row">
+                        <div id="card-stats" class="seaction">
+                            <h4 class="header"><i class="mdi-social-group medium"></i>User Summary</h4>
+                            <div class="row">
+                                <div class="col s12 m3 l2">
+                                    <div class="card green bordered">
+                                        <div class="card-content white-text">
+                                            <div class="card-stats-left-panel">
+                                                <i class="mdi-social-people medium"></i>
+                                            </div>
+                                            <div class="card-stats-right-panel">
+                                                <p class="card-stats-title">Users</p>
+                                                <h4 class="card-stats-number bold header">@Model.AdminDashboard.TotalUsers</h4>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col s12 m3 l2">
+                                    <div class="card light-blue bordered">
+                                        <div class="card-content white-text">
+                                            <div class="card-stats-left-panel">
+                                                <i class="mdi-social-person medium"></i>
+                                            </div>
+                                            <div class="card-stats-right-panel">
+                                                <p class="card-stats-title">Active</p>
+                                                <h4 class="card-stats-number bold header">@Model.AdminDashboard.TotalActiveUser</h4>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col s12 m3 l2">
+                                    <div class="card purple bordered">
+                                        <div class="card-content white-text">
+                                            <div class="card-stats-left-panel">
+                                                <i class="mdi-social-person-outline medium"></i>
+                                            </div>
+                                            <div class="card-stats-right-panel">
+                                                <p class="card-stats-title">Inactive</p>
+                                                <h4 class="card-stats-number bold header">@Model.AdminDashboard.TotalInActiveUser</h4>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                }
+                <div class="row">
+                    <h3 class="header caption-uppercase bold"><i class="mdi-action-loyalty medium"></i>Trending Post (Top 5)</h3>
+
+                    <div class="col s12 m6 l3">
+                        <h5 class="header">Top Viewed Post</h5>
+                        @if (Model.UserTopViewedList != null && Model.UserTopViewedList.Count > 0)
+                        {
+                            var grid = new WebGrid(
+                                        canPage: true,
+                                        rowsPerPage: 2,
+                                        canSort: false,
+                                        ajaxUpdateContainerId: "post-list");
+
+                            grid.Bind(Model.UserTopViewedList, rowCount: 2, autoSortAndPage: false);
+
+                            <ul id="projects-collection" class="collection">
+                                @foreach (var item in Model.UserTopViewedList)
+                                {
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s6">
+                                                <p class="collections-title">@item.PostName</p>
+                                                <p class="collections-content">@item.OfferLocation.LocationName</p>
+
+                                            </div>
+                                            <div class="col s3">
+                                                <p class="collections-content">@item.OfferCategory.CategoryName</p>
+                                            </div>
+                                            <div class="col s3">
+                                                <div id="project-line-1">@item.OfferViews.Count</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="card-panel red lighten-3">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                    <strong>Warning!</strong> No Posts Found!!!!
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <h5 class="header">Top Reviewd Post</h5>
+                        @if (Model.UserTopReviewedList != null && Model.UserTopReviewedList.Count > 0)
+                        {
+                            var grid = new WebGrid(
+                                        canPage: true,
+                                        rowsPerPage: 2,
+                                        canSort: false,
+                                        ajaxUpdateContainerId: "post-list");
+
+                            grid.Bind(Model.UserTopReviewedList, rowCount: 2, autoSortAndPage: false);
+
+                            <ul id="projects-collection" class="collection">
+                                @foreach (var item in Model.UserTopReviewedList)
+                                {
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s6">
+                                                <p class="collections-title">@item.PostName</p>
+                                                <p class="collections-content">@item.OfferLocation.LocationName</p>
+
+                                            </div>
+                                            <div class="col s3">
+                                                <p class="collections-content">@item.OfferCategory.CategoryName</p>
+                                            </div>
+                                            <div class="col s3">
+                                                <div id="project-line-1">@item.OfferReviews.Count</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="card-panel red lighten-3">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                    <strong>Warning!</strong> No Posts Found!!!!
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <h5 class="header">Top Liked Post</h5>
+                        @if (Model.UserTopLikedList != null && Model.UserTopLikedList.Count > 0)
+                        {
+                            var grid = new WebGrid(
+                                        canPage: true,
+                                        rowsPerPage: 2,
+                                        canSort: false,
+                                        ajaxUpdateContainerId: "post-list");
+
+                            grid.Bind(Model.UserTopLikedList, rowCount: 2, autoSortAndPage: false);
+
+                            <ul id="projects-collection" class="collection">
+                                @foreach (var item in Model.UserTopLikedList)
+                                {
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s6">
+                                                <p class="collections-title">@item.PostName</p>
+                                                <p class="collections-content">@item.OfferLocation.LocationName</p>
+
+                                            </div>
+                                            <div class="col s3">
+                                                <p class="collections-content">@item.OfferCategory.CategoryName</p>
+                                            </div>
+                                            <div class="col s3">
+                                                <div id="project-line-1">@item.OfferReviews.Where(t => t.OfferIsFavorite == true).Count()</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="card-panel red lighten-3">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                    <strong>Warning!</strong> No Posts Found!!!!
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    <div class="col s12 m6 l3">
+                        <h5 class="header">Top Followed Post</h5>
+                        @if (Model.UserTopFollowedList != null && Model.UserTopFollowedList.Count > 0)
+                        {
+                            var grid = new WebGrid(
+                                        canPage: true,
+                                        rowsPerPage: 2,
+                                        canSort: false,
+                                        ajaxUpdateContainerId: "post-list");
+
+                            grid.Bind(Model.UserTopFollowedList, rowCount: 2, autoSortAndPage: false);
+
+                            <ul id="projects-collection" class="collection">
+                                @foreach (var item in Model.UserTopFollowedList)
+                                {
+                                    <li class="collection-item">
+                                        <div class="row">
+                                            <div class="col s6">
+                                                <p class="collections-title">@item.PostName</p>
+                                                <p class="collections-content">@item.OfferLocation.LocationName</p>
+
+                                            </div>
+                                            <div class="col s3">
+                                                <p class="collections-content">@item.OfferCategory.CategoryName</p>
+                                            </div>
+                                            <div class="col s3">
+                                                <div id="project-line-1">@item.OfferReviews.Where(t => t.OfferIsFollow == true).Count()</div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="card-panel red lighten-3">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                    <strong>Warning!</strong> No Posts Found!!!!
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,457 @@
+﻿@model OfferWebSystem.EFnClass.OffersInfo
+<script src="~/Scripts/fileinput.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var imagePost;
+        $('.materialboxed').materialbox();
+
+        $("#ddlLocation").change(function () {
+            $('#post-outlet-list').empty();
+            var selectedValue = $("#ddlLocation").val();
+            if (selectedValue != '') {
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Action("GetAvailableOutletList", "Post")',
+                    dataType: 'html',
+                    data: { OfferId: @Model.ID, LocId: selectedValue },
+                    success: function (data) {
+                        $('#post-outlet-list').html(data);
+                    },
+                    error: function (ex) {
+                        alert('Failed to retrieve data.' + ex);
+                    }
+                });
+            }
+        });
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("GetAvailableOutletList", "Post")',
+            dataType: 'html',
+            data: { OfferId: @Model.ID, LocId: @Model.OfferLoc },
+            success: function (data) {
+                $("#post-outlet-list").empty();
+                $('#post-outlet-list').html(data);
+            },
+            error: function (ex) {
+                alert('Failed to retrieve data.' + ex);
+            }
+        });
+
+        $('.datepicker').pickadate({
+            closeOnSelect: true,
+            closeOnClear: true,
+            selectMonths: true,
+            selectYears: true,
+            format: 'dd/mmm/yyyy',
+        });
+        $('.rating-loading').rating({ displayOnly: true, step: 0.5 });
+
+            $.ajax({
+                url: '@Model.OfferImagePath',
+                success: function(data, textStatus) {
+                    imagePost=true;
+
+                    $("#ctrlUpImage").fileinput({
+                        initialPreviewShowDelete: true,
+                        overwriteInitial: true,
+                        initialPreview: [
+                            "<img src=@Model.OfferImagePath class='file-preview-image' alt='PostImage'>"
+                        ],
+                        dataType: 'json',
+                        uploadAsync: false,
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: "Pick Image",
+                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                        removeClass: "btn btn-danger",
+                        removeLabel: "Delete",
+                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                        showUpload: false,
+                        uploadClass: "btn btn-info",
+                        uploadLabel: "Upload",
+                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+                        allowedFileExtensions: ["jpg", "gif", "png"],
+                        minImageWidth: 50,
+                        minImageHeight: 50,
+                        maxFileCount: 1
+
+                    });
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    imagePost=false;
+
+                    $("#ctrlUpImage").fileinput({
+                        previewFileType: "image",
+                        browseClass: "btn btn-success",
+                        browseLabel: "Pick Image",
+                        browseIcon: '<i class="glyphicon glyphicon-picture"></i>',
+                        removeClass: "btn btn-danger",
+                        removeLabel: "Delete",
+                        removeIcon: '<i class="glyphicon glyphicon-trash"></i>',
+                        showUpload: false,
+                        uploadClass: "btn btn-info",
+                        uploadLabel: "Upload",
+                        uploadIcon: '<i class="glyphicon glyphicon-upload"></i>',
+                        allowedFileExtensions: ["jpg", "gif", "png"],
+                        minImageWidth: 50,
+                        minImageHeight: 50,
+                        maxFileCount: 1
+
+                    });
+                }
+            });
+ 
+
+
+    });
+</script>
+
+
+
+<div id="profile-card-postdetail" style="min-height:700px; margin:0px" class="card">
+    <div class="card-panel transparent lighten-2" style="margin:0px;">
+        <p class="email-subject truncate card-title black-text caption">
+            @Model.PostName
+        </p>
+
+    </div>
+    <div class="card-content">
+        <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right modal-trigger">
+            <i class="mdi-editor-mode-edit"></i>
+        </a>
+        <div class="row">
+            @if (!string.IsNullOrEmpty(Session["UserRole"].ToString()) && Session["UserRole"].ToString().ToLower().Contains("administrator"))
+            {
+                <div class="col-sm-12 data-credt-panel">
+                    <div class="row">
+                        <span class="teal-text black-text"><i class="mdi-action-assignment-ind"></i>Created By : @Model.SysUser.UserId</span>
+                        <span class="teal-text black-text"><i class="mdi-action-alarm-add"></i>Created On : @Model.CreatedOn.ToString("dd-MMM-yyyy hh:mm:ss")</span>
+                    </div>
+                    @if (Model.ModifiedBy.HasValue)
+                    {
+                        <div class="row">
+                            <span class="teal-text black-text"><i class="mdi-action-assignment-ind"></i>Modified By : @Model.SysUser1.UserId</span>
+                            <span class="teal-text black-text"><i class="mdi-action-alarm-add"></i>Modified On : @Model.ModifiedOn.Value.ToString("dd-MMM-yyyy hh:mm:ss")</span>
+                        </div>
+                    }
+                </div>
+            }
+            <div class="col-sm-12">
+                <div class="col-sm-4">
+                    <div class="row">
+                        @if (!string.IsNullOrEmpty(Model.OfferImagePath) && File.Exists(Server.MapPath(Model.OfferImagePath)))
+                        {
+                            <img class="materialboxed" width="300" height="300" src="@Model.OfferImagePath" alt="sample" data-caption="@Model.PostName">
+                            <p></p>
+                        }
+                    </div>
+                </div>
+                <div class="col-sm-8">
+                    <div class="row">
+                        <i class="mdi-maps-place blue-text"></i><b class="label-default blue lighten-4"> @Model.OfferLocation.LocationName  </b>
+                        <i class="mdi-action-class deep-purple-text"></i><b class="label-default yellow lighten-4">@Model.OfferCategory.CategoryName</b>
+                        @*<span class="pull-right transparent"><i class="mdi-maps-local-offer green-text"></i><b class="pull-right bold"> @Model.OfferDiscountAmt</b></span>*@
+                        <i class="mdi-maps-local-offer green-text"></i><b class="bold"> @Model.OfferDiscountAmt</b>
+                    </div>
+                    <div class="row">
+                        <i class="left mdi-notification-event-available green-text"></i><b class="label-default light-green lighten-4"> @Model.OfferStartDate.ToString("dd-MMM-yyyy")</b>
+                        <i class="mdi-notification-event-busy red-text"></i><b class="label-default red lighten-4">@Model.OfferEndDate.ToString("dd-MMM-yyyy")</b>
+                    </div>
+                    <div class="row">
+                        <div class="email-content">
+                            <h6 class="header"><span class="transparent bold"><i class="mdi-action-description"></i></span><b>Discount Detail</b></h6>
+                            <p>@Model.OfferDetails</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <hr class="grey-text text-lighten-2">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="col-sm-6">
+                    <div class="email-content-wrap">
+                        <div class="row">
+                            <div id="email-list" class="col s12 m12 l12">
+                                <h6 class="header"><span class="transparent bold"><i class="mdi-action-store cyan-text"></i></span><b>Available Outlet</b>  <b class="badge caption cyan darken-3"> @Model.OfferAvailOutlets.Count</b></h6>
+                                @if (Model != null && Model.OfferAvailOutlets.Count > 0)
+                                {
+
+                                    var grid = new WebGrid(
+                                    canPage: false,
+                                    rowsPerPage: 20,
+                                    canSort: false,
+                                    ajaxUpdateContainerId: "");
+
+                                    grid.Bind(Model.OfferReviews, rowCount: Model.OfferReviews.Count, autoSortAndPage: false);
+
+
+                                    <ul class="collection">
+                                        @foreach (var item in Model.OfferAvailOutlets)
+                                        {
+                                            <li class="collection-item avatar">
+                                                <a href="javascript:void(0);" data-id="@item.ID"></a>
+                                                <span class="circle large light-green">@item.OfferLocOutletMap.OutletName.ToCharArray()[0]</span>
+                                                <div class="row">
+                                                    <div class="col sm-6">
+                                                        <span class="email-title h4 truncate">@item.OfferLocOutletMap.OutletName</span>
+                                                    </div>
+                                                    <div class="col sm-6 pull-right">
+                                                        <span class="left transparent"><i class="mdi-maps-pin-drop"></i></span> <b> @item.OfferLocOutletMap.OfferLocation.LocationName</b>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col s12" style="margin:0px;">
+                                                        <span class="left transparent"><i class="mdi-maps-map"></i></span> <b> @item.OfferLocOutletMap.OutletAddress</b>
+                                                    </div>
+                                                </div>
+
+                                            </li>
+
+                                        }
+
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <div class="row">
+                                        <div class="card-panel red lighten-3 white-text">
+                                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                            <strong>Warning!</strong> No Outlets Found!!!!
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div id="email-list" class="col s12 m12 l12">
+                        <h6 class="header"><b>Review/s</b></h6>
+                        <div class="row">
+                            <div class="email-content">
+                                <div class="col s12">
+                                    <span class="left transparent"><i class="mdi-action-visibility brown-text"></i></span><b class="badge caption brown darken-3"> @Model.OfferViews.Count</b>
+                                    <span class="transparent bold"><i class="mdi-action-question-answer red-text"></i></span><b class="badge caption red lighten-2"> @Model.OfferReviews.Count</b>
+                                    <span class="transparent bold"><i class="mdi-action-thumb-up blue-text"></i></span><b class="badge caption blue"> @Model.OfferReviews.Where(t => t.OfferIsFavorite == true).ToList().Count</b>
+                                    <span class="transparent "><i class="mdi-action-favorite-outline green-text"></i></span><b class="badge caption green"> @Model.OfferReviews.Where(t => t.OfferIsFollow == true).ToList().Count</b>
+                                    @if (@Model.OfferReviews.Count > 0)
+                                    {
+                                        <input id="input-3-xs" type="number" value="@(Model.OfferReviews.Sum(t => t.OfferReview1) / @Model.OfferReviews.Count())" data-size="xs" class="rating-loading" data-min="0" data-max="10">
+                                    }
+                                    else
+                                    {
+                                        <input id="input-3-xs" type="number" value="0" data-size="xs" class="rating-loading" data-min="0" data-max="10">
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model != null && Model.OfferReviews.Count > 0)
+                        {
+
+                            var grid = new WebGrid(
+                            canPage: false,
+                            rowsPerPage: 20,
+                            canSort: false,
+                            ajaxUpdateContainerId: "");
+
+                            grid.Bind(Model.OfferReviews, rowCount: Model.OfferReviews.Count, autoSortAndPage: false);
+
+
+                            <ul class="collection">
+                                @foreach (var item in Model.OfferReviews)
+                                {
+                                    <li class="collection-item avatar">
+                                        <a href="javascript:void(0);" data-id="@item.ID"></a>
+                                        <span class="circle large light-green">@item.OfferReviewerName.ToArray()[0].ToString()</span>
+                                        <div class="row">
+                                            <div class="col sm-8">
+                                                <span class="email-title h4 truncate">@item.OfferReviewerName</span>
+                                            </div>
+                                            <div class="col sm-4 pull-right">
+                                                @if (item.OfferIsFavorite.GetValueOrDefault(false))
+                                                {
+                                                    <span class="transparent bold"><i class="mdi-action-thumb-up blue-text"></i></span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="transparent bold disabled"><i class="mdi-action-thumb-up grey-text"></i></span>
+                                                }
+
+                                                @if (item.OfferIsFollow.GetValueOrDefault(false))
+                                                {
+                                                    <span class="transparent bold"><i class="mdi-action-favorite-outline green-text"></i></span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="transparent bold disabled"><i class="mdi-action-favorite-outline grey-text"></i></span>
+                                                }
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12 m12 l12">
+                                                <span class="left transparent"><i class="mdi-editor-insert-comment"></i></span> <b> @item.OfferReviewComment</b>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col s12" style="margin:0px;">
+
+                                            </div>
+                                        </div>
+
+                                    </li>
+
+                                }
+
+                            </ul>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="card-panel red lighten-3 white-text">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                    <strong>Warning!</strong> No Reviews Found!!!!
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @*<div id="modal5" class="modal bottom-sheet" style="min-height: 500px;">
+        <
+        <div class="card-reveal">
+            <div class="modal-content">
+    *@
+    <div class="card-reveal">
+        @Html.AntiForgeryToken()
+        @using (Html.BeginForm("UpdatePost", "Post", FormMethod.Post, new { @class = "login-form", enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(m => m.ID, new { @name = "OfferId" })
+            
+            @Html.HiddenFor(m => m.IsActive)
+            @Html.HiddenFor(m => m.CreatedBy)
+            @Html.HiddenFor(m => m.CreatedOn)
+            @Html.HiddenFor(m => m.ModifiedBy)
+            @Html.HiddenFor(m => m.ModifiedOn)
+            @Html.HiddenFor(m => m.OfferStatus)
+
+            <span class="card-title caption-uppercase grey-text text-darken-4"> Post Detail <i class="mdi-navigation-close right"></i></span>
+
+            if (!string.IsNullOrEmpty(Session["UserRole"].ToString()) && Session["UserRole"].ToString().ToLower().Contains("administrator"))
+            {
+                <div class="col-sm-3 left">
+                    <div class="switch">
+                        <span class="caption"> <i class="mdi-action-verified-user"></i> Publish </span>
+                        @if (@Model.IsActive)
+                        {
+                            <label>
+                                NO
+                                <input checked="checked" data-val="@Model.IsActive" id="chkIsActive" name="chkIsActive" type="checkbox">
+                                <span class="lever"></span> YES
+                            </label>
+                        }
+                        else
+                        {
+                            <label>
+                                NO
+                                <input data-val="@Model.IsActive" id="chkIsActive" name="chkIsActive" type="checkbox">
+                                <span class="lever"></span> YES
+                            </label>
+                        }
+                    </div>
+                </div>
+            }
+            <div class="col-sm-2 pull-right">
+                <button class="btn waves-effect waves-light right " type="submit" name="action">Save<i class="mdi-content-save left"></i></button>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <i class="mdi-action-receipt prefix"></i>
+                    @Html.TextBoxFor(m => m.PostName, new { id = "offerPost_prefix2", @class = "validate", placeholder = "Enter Discount Post Title", @maxlength="200" })
+                    <label for="PostName" class="active">Discount Post Title</label>
+                    @Html.ValidationMessageFor(m => m.PostName, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <i class="mdi-maps-local-offer prefix"></i>
+                    @Html.TextBoxFor(m => m.OfferDiscountAmt, new { id = "offerPost_discount", @class = "validate", placeholder = "Enter Discount" })
+                    <label for="offerPost_discount" class="active">Discount </label>
+                    @Html.ValidationMessageFor(m => m.OfferDiscountAmt, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    <i class="mdi-action-class prefix"></i>
+                    @Html.DropDownListFor(m => m.OfferCat, (IEnumerable<SelectListItem>
+                                )ViewBag.CatList, "Select Category", new { @class = "browser-left-icon " })
+                    <label for="offerCategory" class="active">Category</label>
+                    @Html.ValidationMessageFor(m => m.OfferCat, null, new { @class = "card-panel red display" })
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <i class="mdi-maps-place prefix"></i>
+                    @Html.DropDownListFor(m => m.OfferLoc, (IEnumerable<SelectListItem>
+                                )ViewBag.LocList, "Select Location", new { @class = "browser-left-icon ", id = "ddlLocation" })
+                    <label for="offerLocation" class="active">Location</label>
+                    @Html.ValidationMessageFor(m => m.OfferLoc, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m6 l6">
+                    <i class="mdi-notification-event-available prefix"></i>
+                    @Html.TextBoxFor(m => m.OfferStartDate, new { id = "offeStartDate", @class = "datepicker", placeholder = "e.g. 20/Feb/2016", @type = "date", @Value = Model.OfferStartDate.ToString("dd/MMM/yyyy") })
+                    <label for="offeStartDate" class="active">Start Date</label>
+                    @Html.ValidationMessageFor(m => m.OfferStartDate, null, new { @class = "card-panel red display" })
+                </div>
+                <div class="input-field col s12 m6 l6">
+                    <i class="mdi-notification-event-busy prefix"></i>
+                    @Html.TextBoxFor(m => m.OfferEndDate, new { @class = "datepicker", placeholder = "e.g. 20/Feb/2016", @type = "date", @Value = Model.OfferEndDate.ToString("dd/MMM/yyyy") })
+                    <label for="offeEndDate" class="active">End Date</label>
+                    @Html.ValidationMessageFor(m => m.OfferEndDate, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s12 m12 l12">
+                    <i class="mdi-action-description prefix"></i>
+                    @Html.TextAreaFor(m => m.OfferDetails, new { id = "offerPost_prefix2", @class = "materialize-textarea", placeholder = "Description of Discounts" })
+                    <label for="PostName" class="active">Discount Details</label>
+                    @Html.ValidationMessageFor(m => m.OfferDetails, null, new { @class = "card-panel red display" })
+                </div>
+            </div>
+            <div class="row">
+                @if (!string.IsNullOrEmpty(Session["UserRole"].ToString()) && Session["UserRole"].ToString().ToLower().Contains("administrator"))
+                {
+                    <div class="input-field col s12 m6 l6">
+                        <i class="mdi-action-receipt prefix"></i>
+                        @Html.DropDownListFor(m => m.OfferFeatureVal, (IEnumerable<SelectListItem>)ViewBag.FeatureList, "Select Feature", new { @class = "browser-left-icon" })
+                        <label for="postFeature" class="active">Feature</label>
+                        @Html.ValidationMessageFor(m => m.OfferFeatureVal, null, new { @class = "card-panel red display" })
+                    </div>
+                }
+            </div>
+            <div class="col-sm-6">
+                <div id="post-outlet-list">
+
+
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="col-md-12">
+                    <input id="ctrlUpImage" name="ctrlPostImage" type="file" multiple class="file-loading" data-preview-file-type="any" accept="image/*" />
+                </div>
+                @*<input type="file" name="files[]" id="js-upload-files" multiple webkitdirectory mozdirectory msdirectory odirectory directory>*@
+            </div>
+
+        }
+    </div>
+
+</div>

@@ -1,0 +1,50 @@
+﻿@model List<OfferWebSystem.EFnClass.OfferLocOutletMap>
+<div class="row" id="outlet-list">
+    <div class="col s12 m12 l12">
+        @if (Model != null && Model.Count > 0)
+        {
+            var grid = new WebGrid(Model, rowsPerPage: 10, canPage: true, canSort: false, ajaxUpdateContainerId: "outlet-list");
+            
+                var gridColumns = new List<WebGridColumn>();
+                gridColumns.Add(grid.Column(header: "Outlet Name", format:@<text><a class="editOutlet modal-trigger" href="#modal1" data-id="@item.ID" data-url="@Url.Action("UpdateOutlet", "Outlet")">@item.OutletName</a></text>));
+                
+
+                gridColumns.Add(grid.Column("OutletAddress", header: "Address"));
+                gridColumns.Add(grid.Column("OfferLocation.LocationName", header: "Location"));
+                if (!string.IsNullOrEmpty(Session["UserRole"].ToString()) && Session["UserRole"].ToString().ToLower().Contains("administrator"))
+
+                {
+                    gridColumns.Add(grid.Column("SysUser.CompanyName", header: "Company Name"));
+                }
+                gridColumns.Add(grid.Column("IsActive", "Status", format: (item) => (item.IsActive) ? Html.Raw("<span class='mdi-action-done'></span>") : Html.Raw("<span class='mdi-action-highlight-remove'></span>")));
+            
+                @grid.Table(
+                         tableStyle: "table",
+                         headerStyle: "flip-content",
+                              alternatingRowStyle: "striped",
+                         columns:grid.Columns(gridColumns.ToArray())
+                                   );
+                <div class="pagination pagination-small pagination-right">
+                    @grid.PagerList(mode: WebGridPagerModes.Numeric, IsPartialAjaxEnabled: false)
+                </div>
+                }
+                else
+                {
+                    <div class="row">
+                        <div class="card-panel red lighten-3 white-text">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                            <strong>Warning!</strong> No Outlets Found!!!!
+                        </div>
+                    </div>
+                }
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.editOutlet').click(function (data) {
+                $('#modal-post-detail').empty();
+
+            });
+        });
+    </script>
+</div>

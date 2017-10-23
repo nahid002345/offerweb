@@ -1,0 +1,177 @@
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\OfferWebSystem.dll.config
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\OfferWebSystem.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\OfferWebSystem.pdb
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Antlr3.Runtime.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\EntityFramework.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\EntityFramework.SqlServer.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Core.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Cookies.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Facebook.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Google.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.OAuth.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Twitter.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Newtonsoft.Json.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Owin.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.Helpers.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.Mvc.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.Optimization.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.Razor.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Deployment.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Razor.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\WebGrease.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.Helpers.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.Mvc.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.Optimization.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.Razor.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Deployment.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Razor.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Antlr3.Runtime.pdb
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Newtonsoft.Json.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\EntityFramework.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\EntityFramework.SqlServer.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Core.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Facebook.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Cookies.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.OAuth.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Google.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Twitter.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\obj\Debug\OfferWebSystem.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\obj\Debug\OfferWebSystem.pdb
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\obj\Debug\OfferWebSystem.csprojResolveAssemblyReference.cache
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\PagedList.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\PagedList.Mvc.dll
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\PagedList.xml
+C:\Users\ONE BANK 1\documents\visual studio 2013\Projects\OfferWebSystem\OfferWebSystem\bin\PagedList.Mvc.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\OfferWebSystem.dll.config
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\OfferWebSystem.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\OfferWebSystem.pdb
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Antlr3.Runtime.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\EntityFramework.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\EntityFramework.SqlServer.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Cookies.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Facebook.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Google.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.OAuth.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Twitter.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Web.Infrastructure.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Newtonsoft.Json.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Owin.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\PagedList.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\PagedList.Mvc.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.Helpers.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.Mvc.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.Optimization.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.Razor.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Deployment.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Razor.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\WebGrease.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\PagedList.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\PagedList.Mvc.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.Helpers.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.Mvc.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.Optimization.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.Razor.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Deployment.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Razor.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Antlr3.Runtime.pdb
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Newtonsoft.Json.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\EntityFramework.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\EntityFramework.SqlServer.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Facebook.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Cookies.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.OAuth.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Google.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Twitter.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\Web App\OfferWebSystem\OfferWebSystem\obj\Debug\OfferWebSystem.dll
+E:\Web App\OfferWebSystem\OfferWebSystem\obj\Debug\OfferWebSystem.pdb
+E:\Web App\OfferWebSystem\OfferWebSystem\obj\Debug\OfferWebSystem.csprojResolveAssemblyReference.cache
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\OfferWebSystem.dll.config
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\OfferWebSystem.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\OfferWebSystem.pdb
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Antlr3.Runtime.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\EntityFramework.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\EntityFramework.SqlServer.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Core.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Cookies.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Facebook.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Google.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.OAuth.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Twitter.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Web.Infrastructure.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Newtonsoft.Json.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Owin.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\PagedList.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\PagedList.Mvc.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.Helpers.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.Mvc.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.Optimization.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.Razor.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Deployment.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Razor.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\WebGrease.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\PagedList.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\PagedList.Mvc.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.Helpers.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.Mvc.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.Optimization.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.Razor.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Deployment.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\System.Web.WebPages.Razor.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Antlr3.Runtime.pdb
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Newtonsoft.Json.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\EntityFramework.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\EntityFramework.SqlServer.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Core.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Facebook.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Cookies.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.OAuth.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Google.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.Twitter.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\Web Dev\OfferWebSystem\OfferWebSystem\obj\Debug\OfferWebSystem.csprojResolveAssemblyReference.cache
+E:\Web Dev\OfferWebSystem\OfferWebSystem\obj\Debug\OfferWebSystem.dll
+E:\Web Dev\OfferWebSystem\OfferWebSystem\obj\Debug\OfferWebSystem.pdb

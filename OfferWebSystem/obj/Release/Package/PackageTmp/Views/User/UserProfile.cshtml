@@ -1,0 +1,39 @@
+﻿@model OfferWebSystem.EFnClass.SysUser
+@{
+    ViewBag.Title = "Profile | Discount Buzz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="container">
+    <div class="section">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <h5 class="header">
+                    <i class="mdi-action-account-circle medium"></i><b class="header"> Profile</b>
+                </h5>
+                @Html.Partial("_userDetailPartial",Model)
+            </div>
+        </div>
+        <div class="row">
+            @if (TempData["SuccessMsg"] != null)
+            {
+                <div class="card-panel light-green">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa fa-check"></span></strong> @TempData["SuccessMsg"].ToString()
+                </div>
+            }
+
+            @if (TempData["ErrorMsg"] != null)
+            {
+                <div class="card-panel red">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                    <strong><span class="fa  fa-times"></span></strong> @TempData["ErrorMsg"].ToString()
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+

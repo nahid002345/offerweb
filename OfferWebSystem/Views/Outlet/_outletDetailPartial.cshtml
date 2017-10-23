@@ -1,0 +1,188 @@
+﻿@model OfferWebSystem.Models.OutletDetailModel
+@{
+    var OutletObj = Model.Outlet;
+}
+
+
+<div class="">
+    <span class="left transparent green-text large"><i class="mdi-action-store"></i></span><h4 class="header">Outlet Detail</h4>
+    @if (Model.IsNew)
+    {
+        <div class="">
+
+            @Html.AntiForgeryToken()
+            @using (Html.BeginForm("InsertOutlet", "Outlet", FormMethod.Post, new { @class = "form" }))
+            {
+                @Html.HiddenFor(m => m.Outlet.ID)
+                @Html.HiddenFor(m => m.Outlet.UserId)
+                @Html.HiddenFor(m => m.Outlet.CreatedBy)
+                @Html.HiddenFor(m => m.Outlet.CreatedOn)
+                @Html.HiddenFor(m => m.Outlet.ModifiedBy)
+                @Html.HiddenFor(m => m.Outlet.ModifiedOn)
+
+                <div class="col-sm-2 pull-right">
+                    <button class="btn waves-effect waves-light right " type="submit" name="action">Save<i class="mdi-content-save left"></i></button>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+                        <i class="mdi-action-receipt prefix"></i>
+                        @Html.TextBoxFor(m => m.Outlet.OutletName, new { id = "OutletName", @class = "validate", placeholder = "Enter Outlet Name" })
+                        <label for="OutletName" class="active">Outlet Name</label>
+                        @Html.ValidationMessageFor(m => m.Outlet.OutletName, null, new { @class = "card-panel red display" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+                        <i class="mdi-maps-map prefix"></i>
+                        @Html.TextBoxFor(m => m.Outlet.OutletAddress, new { id = "OutletAddress", @class = "validate", placeholder = "Enter Outlet Address" })
+                        <label for="OutletAddress" class="active">Address</label>
+                        @Html.ValidationMessageFor(m => m.Outlet.OutletAddress, null, new { @class = "card-panel red display" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m12 l12">
+                        <i class="mdi-maps-place prefix"></i>
+                        @Html.DropDownListFor(m => m.Outlet.LocationID, (IEnumerable<SelectListItem>)ViewBag.LocationList, "Select Location", new { @class = "browser-left-icon-modal" })
+                        <label for="offerCategory" class="active">Location</label>
+                        @Html.ValidationMessageFor(m => m.Outlet.LocationID, null, new { @class = "card-panel red display" })
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div id="profile-card-postdetail" style=" margin:0px" class="card">
+            <div class="card-panel transparent lighten-2" style="margin:0px;">
+                <span class="email-subject truncate card-title black-text caption">
+                    @OutletObj.OutletName
+                </span>
+                <span class="pull-right transparent"><i class="mdi-maps-local-offer black-text"></i><b class="pull-right bold"> @OutletObj.OfferAvailOutlets.Count</b></span>
+                <span class="truncate black-text large"><i class="mdi-maps-place blue-text"></i><b>@OutletObj.OfferLocation.LocationName</b> </span>
+
+            </div>
+            <div class="card-content">
+                <a class="btn-floating activator btn-move-up waves-effect waves-light darken-2 right modal-trigger">
+                    <i class="mdi-editor-mode-edit"></i>
+                </a>
+                <div class="email-content-wrap">
+                    <div class="email-content">
+                        <h6 class="header"><span class="transparent bold"><i class="mdi-maps-map"></i></span><b>Address</b></h6>
+                        <p>@OutletObj.OutletAddress</p>
+                    </div>
+                    <hr />
+                    <div class="col s12 m12 l12">
+                        <h6 class="header"><b>Tagged Offer</b></h6>
+                        @if (OutletObj.OfferAvailOutlets != null && OutletObj.OfferAvailOutlets.Count > 0)
+                        {
+
+                            var grid = new WebGrid(OutletObj.OfferAvailOutlets, rowsPerPage: 10, canPage: false, canSort: false);
+
+
+                            @grid.GetHtml(
+                         tableStyle: "striped-table",
+                         headerStyle: "flip-content",
+
+                         columns: new[]{
+
+
+                           grid.Column("OffersInfo.PostName",header: "Post"),
+                           grid.Column("OffersInfo.OfferDiscountAmt",header: "Discount"),
+                           grid.Column("OffersInfo.OfferDiscountAmt",header: "Location")
+                            },
+                                                                             mode: WebGridPagerModes.All
+                                                                             );
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="card-panel red lighten-3 white-text">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+                                    <strong>Warning!</strong> No Offer Found!!!!
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @if (!string.IsNullOrEmpty(Session["UserRole"].ToString()) && Session["UserRole"].ToString().ToLower().Contains("administrator"))
+                    {
+                        <div class="col-sm-12 data-credt-panel">
+                            <div class="row">
+                                <span class="teal-text black-text"><i class="mdi-action-assignment-ind"></i>Created By : @Model.Outlet.SysUser.UserId</span>
+                                <span class="teal-text black-text"><i class="mdi-action-alarm-add"></i>Created On : @Model.Outlet.CreatedOn.ToString("dd-MMM-yyyy hh:mm:ss")</span>
+                            </div>
+                            @if (Model.Outlet.ModifiedBy.HasValue)
+                            {
+                                <div class="row">
+                                    <span class="teal-text black-text"><i class="mdi-action-assignment-ind"></i>Modified By : @Model.Outlet.SysUser1.UserId</span>
+                                    <span class="teal-text black-text"><i class="mdi-action-alarm-add"></i>Modified On :@Model.Outlet.ModifiedOn.Value.ToString("dd-MMM-yyyy hh:mm:ss")</span>
+                                </div>
+                            }
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="card-reveal">
+                @Html.AntiForgeryToken()
+                @using (Html.BeginForm("UpdateOutlet", "Outlet", FormMethod.Post, new { @class = "form" }))
+                {
+                    @Html.HiddenFor(m => m.Outlet.ID)
+                    @Html.HiddenFor(m => m.Outlet.CreatedBy)
+                    @Html.HiddenFor(m => m.Outlet.CreatedOn)
+                    @Html.HiddenFor(m => m.Outlet.ModifiedBy)
+                    @Html.HiddenFor(m => m.Outlet.ModifiedOn)
+                    <span class="card-title grey-text text-darken-4"><i class="mdi-navigation-close right"></i></span>
+                    <div class="col-sm-2 pull-right">
+                        <button class="btn waves-effect waves-light right " type="submit" name="action">Save<i class="mdi-content-save left"></i></button>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <i class="mdi-action-receipt prefix"></i>
+                            @Html.TextBoxFor(m => m.Outlet.OutletName, new { id = "OutletName", @class = "validate", placeholder = "Enter Outlet Name" })
+                            <label for="OutletName" class="active">Outlet Name</label>
+                            @Html.ValidationMessageFor(m => m.Outlet.OutletName, null, new { @class = "card-panel red display" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <i class="mdi-maps-map prefix"></i>
+                            @Html.TextBoxFor(m => m.Outlet.OutletAddress, new { id = "offerPost_discount", @class = "validate", placeholder = "Offer Discount" })
+                            <label for="offerPost_discount" class="active">Address</label>
+                            @Html.ValidationMessageFor(m => m.Outlet.OutletAddress, null, new { @class = "card-panel red display" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12 m12 l12">
+                            <i class="mdi-maps-place prefix"></i>
+                            @Html.DropDownListFor(m => m.Outlet.LocationID, (IEnumerable<SelectListItem>)ViewBag.LocationList, "Select Location", new { @class = "browser-left-icon-modal" })
+                            <label for="offerLocation" class="active">Location</label>
+                            @Html.ValidationMessageFor(m => m.Outlet.LocationID, null, new { @class = "card-panel red display" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="switch">
+                            <span class="caption"> <i class="mdi-action-verified-user"></i> Active </span>
+                            @if (@Model.Outlet.IsActive)
+                            {
+                                <label>
+                                    NO
+                                    <input checked="checked" data-val="@Model.Outlet.IsActive" id="chkIsActive" name="chkIsActive" type="checkbox">
+                                    <span class="lever"></span> YES
+                                </label>
+                            }
+                            else
+                            {
+                                <label>
+                                    NO
+                                    <input data-val="@Model.Outlet.IsActive" id="chkIsActive" name="chkIsActive" type="checkbox">
+                                    <span class="lever"></span> YES
+                                </label>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    }
+</div>

@@ -1,0 +1,64 @@
+﻿@model List<OfferWebSystem.EFnClass.OfferLocation>
+@{
+    ViewBag.Title = "Location | Discount Buzz";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="mail-app" class="section">
+
+    <div class="row z-depth-1">
+
+        <nav class="light-blue">
+            <div class="nav-wrapper">
+                <div class="left col s12 m6 l6">
+                    <ul>
+                        <li>
+                            <i class="mdi-maps-place white-text"></i>
+                        </li>
+                        <li>
+                            <h4 class="header"> Location</h4>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col s12 m6 l6">
+                    <ul class="right">
+                        <li class="search-out">
+                            <input type="text" class="search-out-text" id="location-search" data-url="@Url.Action("GetLocationByKeyword", "Location")">
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="waves-effect waves-block waves-light show-search"><i class="mdi-action-search"></i></a>
+                        </li>
+                        <li>
+                            <a href="#modal1" data-url="@Url.Action("NewLocation", "Location")" id="newLocation" class="waves-effect waves-block waves-light modal-trigger"><i class="mdi-content-add-circle-outline left" style="margin-right:0"></i><i class="mdi-maps-place right" style="margin-left:0"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <hr />
+        
+
+        <div class="col-sm-12">
+            <div class="preloader-wrapper center hide" id="location-list-loader">
+                <div class="spinner-layer spinner-red-only">
+                    <div class="circle-clipper left">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                        <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                        <div class="circle"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" id="location-list">
+                @Html.Partial("_locationListPartial", Model)
+            </div>
+            <div class="divider"></div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,56 @@
+﻿@model List<OfferWebSystem.EFnClass.SysUser>
+
+<div id="bordered-table">
+    <h4 class="header">System Users</h4>
+    <div class="row">
+        <div class="col s12 m12 l12" id="user-list">
+            <script type="text/javascript">
+                $(document).on("click", ".editUser", function () {
+                    var url = $(this).attr("data-url");
+                    $('#modal1').openModal({
+                        opacity: 0.5,
+                        in_duration: 350,
+                        out_duration: 250,
+                        ready: undefined,
+                        complete: undefined,
+                        dismissible: true
+                    });
+                    $('#modal-post-detail').empty();
+                    $('#modal-post-loader').removeClass('hide');
+                    $('#modal-post-loader').addClass('active');
+                    var id = $(this).attr('data-id'); // the id that's given to each button in the list
+                    $.get(url + '/' + id, function (data) {
+
+                        $('#modal-post-detail').html(data);
+                        $('#modal-post-loader').addClass('hide');
+                    });
+                });
+            </script>
+            @if (Model != null)
+            {
+                var grid = new WebGrid(Model, rowsPerPage: 10, canPage: true, canSort: false, ajaxUpdateContainerId: "user-list");
+                @grid.GetHtml(
+             tableStyle: "table bordered striped",
+             columns: new[]{
+                 grid.Column(header: "User ID",format:@<text><a class="editUser modal-trigger" href="#modal1" data-id="@item.ID" data-url="@Url.Action("UpdateUser", "User")">@item.UserId</a></text>),
+               //grid.Column("UserId",header: "User ID"),
+               grid.Column("SysEnum.EnumName",header: "User Type"),
+               grid.Column("CompanyName",header: "Comapny"),
+               grid.Column("Email",header: "Email"),
+               grid.Column("ContactNo",header: "Contact No"),
+               grid.Column("Website",header: "Website")
+             }, mode: WebGridPagerModes.FirstLast
+                                         );
+                <div class="pagination pagination-small pagination-right">
+                    @grid.PagerList(mode: WebGridPagerModes.Numeric)
+                </div>
+            }
+            else
+            {
+                <div class="note note-warning">
+                    <h4 class="block"><span class="fa fa-warning"></span>No result found </h4>
+                </div>
+            }
+        </div>
+    </div>
+</div>

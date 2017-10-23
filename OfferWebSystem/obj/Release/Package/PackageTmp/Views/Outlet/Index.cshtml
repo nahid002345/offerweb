@@ -1,0 +1,80 @@
+﻿@model OfferWebSystem.Models.OutletListModel
+    @{
+        ViewBag.Title = "Outlet | Discount Buzz";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+
+    <div id="mail-app" class="section">
+
+        <div class="row z-depth-1">
+
+            <nav class="light-blue">
+                <div class="nav-wrapper">
+                    <div class="left col s12 m6 l6">
+                        <ul>
+                            <li>
+                                <i class="mdi-action-store white-text"></i>
+                            </li>
+                            <li>
+                                <h4 class="header"> Outlet</h4>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col s12 m6 l6">
+                        <ul class="right">
+                            <li class="search-out">
+                                <input type="text" class="search-out-text" id="outlet-search" data-url="@Url.Action("GetOutletByLocation", "Outlet")">
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect waves-block waves-light show-search"><i class="mdi-action-search"></i></a>
+                            </li>
+                            <li>
+                                <a href="#modal1" data-url="@Url.Action("NewOutlet", "Outlet")" id="newOutlet" class="waves-effect waves-block waves-light modal-trigger"><i class="mdi-content-add-circle-outline left" style="margin-right:0"></i><i class="mdi-action-store right" style="margin-left:0"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <hr />
+            <div class="col-sm-2 pull-left badge-example left-select-panel">
+                <div class="row">
+                    <h4 class="header">Locations</h4>
+                    <ul id="task-card" class="collection with-header">
+                        @foreach (OfferWebSystem.EFnClass.OfferLocation oLocation in Model.OutletList.Select(x => x.OfferLocation).Distinct().ToList())
+                        {
+                            <li class="collection-item dismissable">
+                                <input type="checkbox" id="chkLoc_@oLocation.ID" class="chkOutletLocation" data-id="@oLocation.ID" value="@oLocation.ID" data-url="@Url.Action("GetOutletByLocation", "Outlet")" />
+                                <label for="chkLoc_@oLocation.ID">
+                                    <span class="truncate">@oLocation.LocationName </span>
+                                </label>
+                            </li>
+
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            <div class="col-sm-10">
+                <div class="preloader-wrapper center hide" id="outlet-list-loader">
+                    <div class="spinner-layer spinner-red-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="gap-patch">
+                            <div class="circle"></div>
+                        </div>
+                        <div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                    @Html.Partial("_outletListPartial", Model.OutletList)
+                
+                <div class="divider"></div>
+
+            </div>
+
+        </div>
+    </div>
